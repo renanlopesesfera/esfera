@@ -20,9 +20,6 @@ import UxFile from '@/assets/svg/ux/file.svg'
 // css
 import styles from './form.module.scss'
 
-// utils
-import { evaluatePasswordStrength } from '@/utils/functions'
-
 export interface FormProps {
 	className?: string
 	children: React.ReactNode
@@ -410,7 +407,6 @@ export interface InputProps {
 	match?: string
 	noMargin?: boolean
 	isWhite?: boolean
-	strengthMeter?: boolean
 }
 
 export const Input = ({
@@ -431,8 +427,7 @@ export const Input = ({
 	onKeyDown,
 	match,
 	noMargin,
-	isWhite,
-	strengthMeter
+	isWhite
 }: InputProps) => {
 	const {
 		register,
@@ -454,15 +449,6 @@ export const Input = ({
 	if (match) {
 		validations.validate = (value) =>
 			value === watch(match) || 'Password does not match'
-	}
-
-	// Add password strength validation if strengthMeter is enabled
-	if (strengthMeter && type === 'password') {
-		validations.validate = (value) => {
-			if (!value) return true // Let required validation handle empty values
-			const { strength } = evaluatePasswordStrength(value)
-			return strength === 'strong' || 'Please choose a stronger password'
-		}
 	}
 
 	let text = type === 'password' ? 'password' : 'message'
@@ -527,9 +513,6 @@ export const Input = ({
 	// determine whether the label should shrink based on focus or input value
 	const shouldShrinkLabel = isFocused || (inputValue && inputValue !== '')
 
-	// determine the strength of the password for strength meter
-	const passwordStrength = strengthMeter && type === 'password' ? evaluatePasswordStrength(inputValue || '') : null
-
 	return (
 		<>
 			<div
@@ -591,29 +574,6 @@ export const Input = ({
 				)}
 
 			</div>
-
-			{strengthMeter && type === 'password' && (
-				<div className={styles.strengthMeter}>
-
-					{inputValue && inputValue.length > 0 && (
-						<div 
-							className={clsx(
-								styles.strengthMeterBar,
-								passwordStrength && styles[`strength${passwordStrength.strength.charAt(0).toUpperCase() + passwordStrength.strength.slice(1)}`]
-							)}
-						>
-							{passwordStrength ? passwordStrength.message : ''}
-						</div>
-					)}
-
-					{passwordStrength && passwordStrength.strength !== 'strong' && inputValue && (
-						<div className={styles.strengthHint}>
-							Password must include: uppercase letters, lowercase letters, numbers, and special characters
-						</div>
-					)}
-
-				</div>
-			)}
 		</>
 	)
 }

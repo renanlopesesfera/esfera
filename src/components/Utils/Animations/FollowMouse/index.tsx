@@ -38,18 +38,19 @@ export default function FollowMouse({
             left: middleY * -1
         })
 
-        function moveCircle(e: MouseEvent | WheelEvent) {
+        function moveCircle(e: Event) {
+            const mouseEvent = e as MouseEvent | WheelEvent
             gsap.to(item, {
                 position: 'fixed',
-                x: scrollTrigger ? e.layerX : e.clientX - (parent as HTMLElement).offsetLeft,
-                y: scrollTrigger ? e.layerY : e.clientY - (parent as HTMLElement).offsetTop,
+                x: scrollTrigger ? mouseEvent.layerX : mouseEvent.clientX - (parent as HTMLElement).offsetLeft,
+                y: scrollTrigger ? mouseEvent.layerY : mouseEvent.clientY - (parent as HTMLElement).offsetTop,
                 ease: 'power2.out',
                 duration: .6
             })
         }
 
         parent?.addEventListener('mousemove', moveCircle)
-        parent?.addEventListener('mousewheel', moveCircle)
+        parent?.addEventListener('wheel', moveCircle)
 
         parent?.addEventListener('mouseenter', () => {
             setTimeout(() => {
@@ -72,7 +73,7 @@ export default function FollowMouse({
         }
 
         parent?.addEventListener('mouseleave', () => leave())
-        document.addEventListener('scrollTop', leave())
+        document.addEventListener('scroll', leave)
 
     }, { dependencies: [lenis] })
 

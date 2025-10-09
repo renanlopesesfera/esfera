@@ -75,7 +75,7 @@ export default function GDPR() {
                 </h2>
 
                 <p className='text-16'>
-                    Our website uses cookies. By using our website and agreeing to this policy, you consent to our use of cookies in accordance with our <Link href={pages.privacy} className='hover-underline'>Privacy Policy</Link> and our <Link href={pages.terms} className='hover-underline'>Terms and Conditions</Link>.
+                    Our website uses cookies. By using our website and agreeing to this policy, you consent to our use of cookies in accordance with our <Link href={pages.privacy} className='hover-underline'>Privacy Policy</Link>.
                 </p>
 
                 <div className={styles.buttons}>

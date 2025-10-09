@@ -8,9 +8,6 @@ import { gsap } from 'gsap/dist/gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
-// utils
-import { placeholder } from '@/utils/functions'
-
 // Register plugins only when needed
 if (typeof window !== 'undefined') {
 	gsap.registerPlugin(ScrollTrigger)
@@ -100,8 +97,6 @@ export default function ImageReveal({
                 className='cover'
                 fill
 				loading='lazy'
-                placeholder='blur'
-                blurDataURL={placeholder()}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
         </div>

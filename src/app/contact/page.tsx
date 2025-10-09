@@ -131,7 +131,7 @@ export default function Contact() {
 									<div className={clsx(styles.left, 'relative')}>
 
 										<p className='text-12 mb-half'>
-											We will process your personal data according to our <Link href={pages.terms} className='hover-underline'>Terms and Conditions</Link>.
+											We will process your personal data according to our <Link href={pages.privacy} className='hover-underline'>Terms and Conditions</Link>.
 										</p>
 
 										<Checkbox
