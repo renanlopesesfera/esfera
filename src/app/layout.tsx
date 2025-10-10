@@ -45,6 +45,12 @@ export const metadata: Metadata = {
 	}
 }
 
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	userScalable: false
+}
+
 import { Poppins } from 'next/font/google'
 
 const poppins = Poppins({
@@ -57,12 +63,6 @@ const poppins = Poppins({
 
 interface RootLayoutProps {
 	children: React.ReactNode
-}
-
-export const viewport: Viewport = {
-	width: 'device-width',
-	initialScale: 1,
-	userScalable: false
 }
 
 export default function RootLayout({

@@ -36,7 +36,8 @@ export default function Footer() {
 				trigger: '.logo-footer',
 				start: 'top bottom',
 				end: 'bottom 95%',
-				scrub: 2
+				scrub: 2,
+				markers: true
 			}
 		})
 	})
