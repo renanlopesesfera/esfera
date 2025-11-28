@@ -1,10 +1,9 @@
 'use client'
 
 // libraries
-import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useMemo, useRef } from 'react'
+import { useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -49,48 +48,37 @@ export default function Portfolio() {
 		const links = gsap.utils.toArray('[data-link]') as HTMLElement[]
 		const textContainers = gsap.utils.toArray('[data-texts]') as HTMLElement[]
 
-		// Set initial clipPath
-		gsap.set(bgs, {
-			clipPath: 'inset(0% 0% 0% 0%)'
-		})
-
-		gsap.set(thumbnails, {
-			clipPath: 'inset(0% 0% 0% 0%)'
-		})
-
-		gsap.set(links, {
-			clipPath: 'inset(0% 0% 0% 0%)'
-		})
-
-		// Set initial brightness for background images
-		gsap.set(bgImages, {
-			filter: 'brightness(1)'
-		})
-
-		// Set initial transform for texts based on their project index
-		textContainers.forEach((container, containerIndex) => {
-			const textIndex = Math.floor(containerIndex / 2)
-			const text = container.querySelector('p') as HTMLElement
-			
-			if (!text) return
-			
-			if (textIndex === 0) {
-				// First project: start at 0% (none)
-				gsap.set(text, { y: '0%' })
-			} else {
-				// All other projects: start at 110%
-				gsap.set(text, { y: '110%' })
-			}
-		})
-
-		// Calculate viewport height - 100lvh = 100vh = window.innerHeight
 		const vh = window.innerHeight
-
-		// Pin duration: only for items that have clip-path animations (projects.length - 1)
-		const pinDuration = (projects.length - 1) * vh
 		const itemsWithAnimation = projects.length - 1
+		const pinDuration = itemsWithAnimation * vh
 
-		// Pin the container for the total duration
+		gsap.set([bgs, thumbnails, links], { clipPath: 'inset(0% 0% 0% 0%)' })
+		gsap.set(bgImages, { opacity: 1 })
+		textContainers.forEach((container, i) => {
+			const text = container.querySelector('p') as HTMLElement
+			if (text) gsap.set(text, { y: Math.floor(i / 2) === 0 ? '0%' : '110%' })
+		})
+
+		// helper function
+		const animateClipPath = (elements: HTMLElement[], progress: number) => {
+			elements.forEach((el, index) => {
+				if (index === projects.length - 1) {
+					gsap.set(el, { clipPath: 'inset(0% 0% 0% 0%)' })
+					return
+				}
+
+				const sectionStart = index / itemsWithAnimation
+				const sectionEnd = (index + 1) / itemsWithAnimation
+				const sectionProgress = (progress - sectionStart) / (sectionEnd - sectionStart)
+
+				if (progress >= sectionStart && progress <= sectionEnd) {
+					gsap.set(el, { clipPath: `inset(0% 0% ${100 * sectionProgress}% 0%)` })
+				} else {
+					gsap.set(el, { clipPath: progress < sectionStart ? 'inset(0% 0% 0% 0%)' : 'inset(0% 0% 100% 0%)' })
+				}
+			})
+		}
+
 		ScrollTrigger.create({
 			trigger: containerRef.current,
 			start: 'top top',
@@ -99,8 +87,6 @@ export default function Portfolio() {
 			pinSpacing: true
 		})
 
-		// Create a single ScrollTrigger to track progress through the pinned section
-		// and animate each clip-path during its respective 100vh section
 		ScrollTrigger.create({
 			trigger: containerRef.current,
 			start: 'top top',
@@ -108,166 +94,47 @@ export default function Portfolio() {
 			scrub: true,
 			onUpdate: (self) => {
 				const progress = self.progress
-				
-				// Apply clip-path animation to backgrounds
+
+				// animate clip-paths
+				animateClipPath(bgs, progress)
+				animateClipPath(thumbnails, progress)
+				animateClipPath(links, progress)
+
+				// animate bg
 				bgs.forEach((bg, index) => {
 					const bgImage = bg.querySelector('img') as HTMLElement
-					
-					if (index === projects.length - 1) {
-						gsap.set(bg, {
-							clipPath: 'inset(0% 0% 0% 0%)'
-						})
-						if (bgImage) {
-							gsap.set(bgImage, { filter: 'brightness(1)' })
-						}
-						return
-					}
-					
+					if (!bgImage || index === projects.length - 1) return
+
 					const sectionStart = index / itemsWithAnimation
 					const sectionEnd = (index + 1) / itemsWithAnimation
-					
+					const sectionProgress = (progress - sectionStart) / (sectionEnd - sectionStart)
+
 					if (progress >= sectionStart && progress <= sectionEnd) {
-						const sectionProgress = (progress - sectionStart) / (sectionEnd - sectionStart)
-						const bottomValue = 100 * sectionProgress
-						
-						gsap.set(bg, {
-							clipPath: `inset(0% 0% ${bottomValue}% 0%)`
-						})
-						
-						// Brightness from 1 to 0.1 as the clip-path animates
-						if (bgImage) {
-							const brightnessValue = 1 - (sectionProgress * 0.9)
-							gsap.set(bgImage, { filter: `brightness(${brightnessValue})` })
-						}
-					} else if (progress < sectionStart) {
-						gsap.set(bg, {
-							clipPath: 'inset(0% 0% 0% 0%)'
-						})
-						if (bgImage) {
-							gsap.set(bgImage, { filter: 'brightness(1)' })
-						}
-					} else if (progress > sectionEnd) {
-						gsap.set(bg, {
-							clipPath: 'inset(0% 0% 100% 0%)'
-						})
-						if (bgImage) {
-							gsap.set(bgImage, { filter: 'brightness(0.1)' })
-						}
+						gsap.set(bgImage, { opacity: 1 - (sectionProgress * 0.9) })
+					} else {
+						gsap.set(bgImage, { opacity: progress < sectionStart ? 1 : 0.1 })
 					}
 				})
-				
-				// Apply the same clip-path animation to thumbnails (synced)
-				thumbnails.forEach((thumbnail, index) => {
-					if (index === projects.length - 1) {
-						gsap.set(thumbnail, {
-							clipPath: 'inset(0% 0% 0% 0%)'
-						})
-						return
-					}
-					
-					const sectionStart = index / itemsWithAnimation
-					const sectionEnd = (index + 1) / itemsWithAnimation
-					
-					if (progress >= sectionStart && progress <= sectionEnd) {
-						const sectionProgress = (progress - sectionStart) / (sectionEnd - sectionStart)
-						const bottomValue = 100 * sectionProgress
-						
-						gsap.set(thumbnail, {
-							clipPath: `inset(0% 0% ${bottomValue}% 0%)`
-						})
-					} else if (progress < sectionStart) {
-						gsap.set(thumbnail, {
-							clipPath: 'inset(0% 0% 0% 0%)'
-						})
-					} else if (progress > sectionEnd) {
-						gsap.set(thumbnail, {
-							clipPath: 'inset(0% 0% 100% 0%)'
-						})
-					}
-				})
-				
-				// Apply the same clip-path animation to links (synced)
-				links.forEach((link, index) => {
-					if (index === projects.length - 1) {
-						gsap.set(link, {
-							clipPath: 'inset(0% 0% 0% 0%)'
-						})
-						return
-					}
-					
-					const sectionStart = index / itemsWithAnimation
-					const sectionEnd = (index + 1) / itemsWithAnimation
-					
-					if (progress >= sectionStart && progress <= sectionEnd) {
-						const sectionProgress = (progress - sectionStart) / (sectionEnd - sectionStart)
-						const bottomValue = 100 * sectionProgress
-						
-						gsap.set(link, {
-							clipPath: `inset(0% 0% ${bottomValue}% 0%)`
-						})
-					} else if (progress < sectionStart) {
-						gsap.set(link, {
-							clipPath: 'inset(0% 0% 0% 0%)'
-						})
-					} else if (progress > sectionEnd) {
-						gsap.set(link, {
-							clipPath: 'inset(0% 0% 100% 0%)'
-						})
-					}
-				})
-				
-				// Apply transform translateY animation to texts with custom timing (scalable for any number of projects)
+
+				// animate texts
 				textContainers.forEach((container, containerIndex) => {
 					const textIndex = Math.floor(containerIndex / 2)
 					const text = container.querySelector('p') as HTMLElement
-					
 					if (!text) return
-					
-					const totalProjects = projects.length
-					const animatedSections = itemsWithAnimation // projects.length - 1
-					
-					if (textIndex === 0) {
-						// First text: 0% to -110%, ends at 50% of its clip-path section
-						const animStart = 0
-						const animEnd = 0.5 / animatedSections
-						
-						if (progress >= animStart && progress <= animEnd) {
-							const animProgress = (progress - animStart) / (animEnd - animStart)
-							const translateY = -110 * animProgress
-							gsap.set(text, { y: `${translateY}%` })
-						} else if (progress < animStart) {
-							gsap.set(text, { y: '0%' })
-						} else {
-							gsap.set(text, { y: '-110%' })
-						}
-					} else if (textIndex === totalProjects - 1) {
-						// Last text: 110% to 0%, starts at 50% of the last clip-path section
-						const animStart = (animatedSections - 0.5) / animatedSections
-						const animEnd = 1
-						
-						if (progress >= animStart && progress <= animEnd) {
-							const animProgress = (progress - animStart) / (animEnd - animStart)
-							const translateY = 110 - (animProgress * 110)
-							gsap.set(text, { y: `${translateY}%` })
-						} else if (progress < animStart) {
-							gsap.set(text, { y: '110%' })
-						} else {
-							gsap.set(text, { y: '0%' })
-						}
+
+					const isFirst = textIndex === 0
+					const isLast = textIndex === projects.length - 1
+					const animStart = isFirst ? 0 : isLast ? (itemsWithAnimation - 0.5) / itemsWithAnimation : (textIndex - 0.5) / itemsWithAnimation
+					const animEnd = isFirst ? 0.5 / itemsWithAnimation : isLast ? 1 : (textIndex + 0.5) / itemsWithAnimation
+					const animProgress = (progress - animStart) / (animEnd - animStart)
+
+					if (progress >= animStart && progress <= animEnd) {
+						const translateY = isFirst ? -110 * animProgress : isLast ? 110 - (animProgress * 110) : 110 - (animProgress * 220)
+						gsap.set(text, { y: `${translateY}%` })
+					} else if (progress < animStart) {
+						gsap.set(text, { y: isFirst ? '0%' : '110%' })
 					} else {
-						// Middle texts: 110% to -110%
-						const animStart = (textIndex - 0.5) / animatedSections
-						const animEnd = (textIndex + 0.5) / animatedSections
-						
-						if (progress >= animStart && progress <= animEnd) {
-							const animProgress = (progress - animStart) / (animEnd - animStart)
-							const translateY = 110 - (animProgress * 220)
-							gsap.set(text, { y: `${translateY}%` })
-						} else if (progress < animStart) {
-							gsap.set(text, { y: '110%' })
-						} else {
-							gsap.set(text, { y: '-110%' })
-						}
+						gsap.set(text, { y: isFirst || !isLast ? '-110%' : '0%' })
 					}
 				})
 			}
@@ -275,9 +142,7 @@ export default function Portfolio() {
 
 		return () => {
 			ScrollTrigger.getAll().forEach(trigger => {
-				if (trigger.vars.trigger === containerRef.current) {
-					trigger.kill()
-				}
+				if (trigger.vars.trigger === containerRef.current) trigger.kill()
 			})
 		}
 	}, { scope: containerRef, dependencies: [projects.length] })
@@ -295,7 +160,7 @@ export default function Portfolio() {
 				{projects.map((item, i) => (
 					<div
 						key={i}
-						className='absolute inset-0 w-full h-full'
+						className='absolute inset-0 w-full h-full bg-black'
 						style={{ zIndex: projects.length - i }}
 						data-bg
 					>
