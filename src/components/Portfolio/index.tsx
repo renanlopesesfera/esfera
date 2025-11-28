@@ -84,7 +84,8 @@ export default function Portfolio() {
 			start: 'top top',
 			end: `+=${pinDuration}`,
 			pin: true,
-			pinSpacing: true
+			pinSpacing: true,
+			anticipatePin: 1
 		})
 
 		ScrollTrigger.create({
@@ -92,6 +93,7 @@ export default function Portfolio() {
 			start: 'top top',
 			end: `+=${pinDuration}`,
 			scrub: true,
+			anticipatePin: 1,
 			onUpdate: (self) => {
 				const progress = self.progress
 

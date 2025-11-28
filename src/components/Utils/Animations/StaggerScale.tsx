@@ -5,19 +5,18 @@ import { gsap } from 'gsap/dist/gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
-// Register plugins only when needed
-if (typeof window !== 'undefined') {
-	gsap.registerPlugin(ScrollTrigger)
-}
+gsap.registerPlugin(ScrollTrigger)
 
 interface StaggerScaleProps {
 	className?: string
 	children: React.ReactNode
+	infinite?: boolean
 }
 
 export default function StaggerScale({
 	className,
 	children,
+	infinite = false
 }: StaggerScaleProps) {
 	
 	const item = useRef(null)
@@ -27,14 +26,26 @@ export default function StaggerScale({
 		
 			const children = (item.current as HTMLElement).children
 
-			Array.from(children).forEach(item => {
-				gsap.from(item, {
-					scale: 0,
-					scrollTrigger: {
-						trigger: item,
-						scrub: 2,
-						start: 'top 100%',
-						end: 'bottom 70%'
+			gsap.set(children, {
+				scale: 0
+			})
+
+			ScrollTrigger.batch(children, {
+				start: '-50% 100%',
+				onEnter: elements => {
+					gsap.to(elements, {
+						scale: 1,
+						stagger: 0.125,
+						duration: .5
+					})
+				},
+				...(infinite && {
+					onLeaveBack: elements => {
+						gsap.to(elements, {
+							scale: 0,
+							stagger: 0.125,
+							duration: .5
+						})
 					}
 				})
 			})

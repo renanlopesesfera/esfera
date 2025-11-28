@@ -1,6 +1,7 @@
 // components
 import TextReveal from '@/components/Utils/Animations/TextReveal'
 import Marquee from '@/components/Marquee'
+import AnimatedTitle from '@/components/Utils/Animations/AnimatedTitle'
 
 export default function ClientsSlider() {
 
@@ -85,9 +86,11 @@ export default function ClientsSlider() {
             <div className='base-container'>
                 <div className='md:flex md:gap-4 md:justify-between'>
 
-                    <h2 className='uppercase font-heading text-[33vw] md:text-[18vw] tracking-tighter leading-none text-yellow whitespace-nowrap -ml-2 md:ml-0'>
-                        Clientes
-                    </h2>
+                    <AnimatedTitle
+                        className='uppercase font-heading text-[33vw] md:text-[18vw] tracking-tighter leading-none text-yellow whitespace-nowrap -ml-2 md:ml-0 pr-1 [&_small]:opacity-0'
+                    >
+                        Clientes<small>.</small>
+                    </AnimatedTitle>
 
                     <TextReveal className='md:text-right mt-6 md:mt-4'>
                         <p className='text-18 md:w-80 lg:mt-5 xl:mt-7 2xl:mt-10'>

@@ -37,7 +37,8 @@ export default function Counter({ number, className }: CounterProps) {
 					scrollTrigger: {
 						trigger: item.current,
 						start: 'top 90%',
-						toggleActions: 'play none none none'
+						toggleActions: 'play none none none',
+						//markers: true
 					}
 				}
 			)

@@ -8,21 +8,18 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { SplitText } from 'gsap/dist/SplitText'
 
-// register plugins only when needed
-if (typeof window !== 'undefined') {
-	gsap.registerPlugin(ScrollTrigger, SplitText)
-}
+gsap.registerPlugin(ScrollTrigger, SplitText)
 
 interface AnimatedTitleProps {
-    text: string
+    children: React.ReactNode
+	style?: 'gray-yellow' | 'gray-black' | 'white-yellow'
     className?: string
-	invert?: boolean
 }
 
 export default function AnimatedTitle({
-    text,
-    className,
-	invert
+    children,
+	style = 'gray-yellow',
+    className
 }: AnimatedTitleProps) {
 
     const item = useRef<HTMLHeadingElement>(null)
@@ -58,12 +55,14 @@ export default function AnimatedTitle({
         <h2
 			className={clsx(
 				'fill-title',
-				invert && 'fill-title--invert',
+				style === 'gray-yellow' && 'gray-yellow',
+				style === 'gray-black' && 'gray-black',
+				style === 'white-yellow' && 'white-yellow',
 				className
 			)}
 			ref={item}
 		>
-            {text}
+            {children}
         </h2>
     )
 }

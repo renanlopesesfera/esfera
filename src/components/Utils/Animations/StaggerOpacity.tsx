@@ -7,17 +7,17 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-interface StaggerUpProps {
+interface StaggerOpacityProps {
 	className?: string
 	children: React.ReactNode
 	infinite?: boolean
 }
 
-export default function StaggerUp({
+export default function StaggerOpacity({
 	className,
 	children,
 	infinite = false
-}: StaggerUpProps) {
+}: StaggerOpacityProps) {
 	
 	const item = useRef(null)
 
@@ -27,8 +27,7 @@ export default function StaggerUp({
 			const children = (item.current as HTMLElement).children
 
 			gsap.set(children, {
-				opacity: 0,
-				y: '10vh'
+				opacity: 0
 			})
 
 			ScrollTrigger.batch(children, {
@@ -36,18 +35,16 @@ export default function StaggerUp({
 				onEnter: elements => {
 					gsap.to(elements, {
 						opacity: 1,
-						y: 0,
-						stagger: 0.125,
-						duration: .5
+						stagger: 0.2,
+						duration: 1
 					})
 				},
 				...(infinite && {
 					onLeaveBack: elements => {
 						gsap.to(elements, {
 							opacity: 0,
-							y: '10vh',
-							stagger: 0.125,
-							duration: .5
+							stagger: 0.2,
+							duration: 1
 						})
 					}
 				})
