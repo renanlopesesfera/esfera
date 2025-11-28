@@ -29,7 +29,11 @@ export default function SmoothScroller({
     return (
         <ReactLenis
             root
-            options={{ autoRaf: false }}
+            options={{
+                autoRaf: false,
+                wheelMultiplier: .625,
+                
+            }}
             ref={lenisRef}
         >
             {children}
