@@ -45,6 +45,7 @@ export default function Portfolio() {
 		const bgs = gsap.utils.toArray('[data-bg]') as HTMLElement[]
 		const bgImages = bgs.map(bg => bg.querySelector('img')).filter(Boolean) as HTMLElement[]
 		const thumbnails = gsap.utils.toArray('[data-thumbnail]') as HTMLElement[]
+		const thumbnailsImages = thumbnails.map(thumbnail => thumbnail.querySelector('img')).filter(Boolean) as HTMLElement[]
 		const links = gsap.utils.toArray('[data-link]') as HTMLElement[]
 		const textContainers = gsap.utils.toArray('[data-texts]') as HTMLElement[]
 
@@ -54,6 +55,7 @@ export default function Portfolio() {
 
 		gsap.set([bgs, thumbnails, links], { clipPath: 'inset(0% 0% 0% 0%)' })
 		gsap.set(bgImages, { opacity: 1 })
+		gsap.set(thumbnailsImages, { opacity: 1 })
 		textContainers.forEach((container, i) => {
 			const text = container.querySelector('p') as HTMLElement
 			if (text) gsap.set(text, { y: Math.floor(i / 2) === 0 ? '0%' : '110%' })
@@ -119,6 +121,24 @@ export default function Portfolio() {
 						gsap.set(bgImage, { opacity: 1 - (sectionProgress * 0.9) })
 					} else {
 						gsap.set(bgImage, { opacity: progress < sectionStart ? 1 : 0.1 })
+					}
+				})
+
+				// animate thumbnailsImages opacity
+				thumbnailsImages.forEach((thumbnail, index) => {
+					if (index === projects.length - 1) {
+						gsap.set(thumbnail, { opacity: 1 })
+						return
+					}
+
+					const sectionStart = index / itemsWithAnimation
+					const sectionEnd = (index + 1) / itemsWithAnimation
+					const sectionProgress = (progress - sectionStart) / (sectionEnd - sectionStart)
+
+					if (progress >= sectionStart && progress <= sectionEnd) {
+						gsap.set(thumbnail, { opacity: 1 - (sectionProgress * 0.9) })
+					} else {
+						gsap.set(thumbnail, { opacity: progress < sectionStart ? 1 : 0.1 })
 					}
 				})
 
@@ -208,13 +228,14 @@ export default function Portfolio() {
 								</div>
 
 								<div
-									className='relative md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 overflow-hidden h-[50vh] max-w-[90%] w-auto aspect-square md:aspect-8/10 rounded-sm md:rounded-md mx-auto'
+									className='relative md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 overflow-hidden h-[50vh] max-w-[90%] w-auto aspect-square md:aspect-8/10 rounded-sm md:rounded-md mx-auto bg-black'
 									data-thumbnail
 								>
 									<Image
 										src={item.mainImage}
 										alt={item.textLeft}
 										fill
+										className='object-cover'
 									/>
 								</div>
 

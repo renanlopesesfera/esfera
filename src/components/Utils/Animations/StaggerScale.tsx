@@ -31,6 +31,7 @@ export default function StaggerScale({
 			})
 
 			ScrollTrigger.batch(children, {
+				scroller: document.getElementById('viewport') as HTMLElement,
 				start: '-50% 100%',
 				onEnter: elements => {
 					gsap.to(elements, {

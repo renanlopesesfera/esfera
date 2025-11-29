@@ -33,6 +33,7 @@ export default function StaggerUp({
 
 			ScrollTrigger.batch(children, {
 				start: '-50% 100%',
+				scroller: document.getElementById('viewport') as HTMLElement,
 				onEnter: elements => {
 					gsap.to(elements, {
 						opacity: 1,

@@ -123,7 +123,7 @@ export default function Intro() {
             scroller: document.getElementById('viewport') as HTMLElement,
             trigger: wrapperRef.current,
             start: 'top top',
-            end: '+=100%',
+            end: '+=90%',
             scrub: true,
             animation: bgAnimation,
             onRefresh: updateAnimation
@@ -200,6 +200,9 @@ export default function Intro() {
                             fadeEffect={{
                                 crossFade: true
                             }}
+                            allowTouchMove={false}
+                            preventClicks={true}
+                            noSwiping={true}
                             loop
                             className='w-full text-white'
                             autoplay={{

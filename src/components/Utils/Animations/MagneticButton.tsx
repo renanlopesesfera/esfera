@@ -73,11 +73,18 @@ export default function MagneticButton({
         const handleResize = () => throttledUpdateBounding()
         const handleScroll = () => throttledUpdateBounding()
 
+        // Get the viewport scroll container
+        const viewport = document.getElementById('viewport')
+
         // Add event listeners
         magnetButton.addEventListener('mousemove', moveMagnet)
         magnetButton.addEventListener('mouseleave', handleMouseLeave)
         window.addEventListener('resize', handleResize, { passive: true })
-        window.addEventListener('scroll', handleScroll, { passive: true })
+        
+        // Listen to scroll on #viewport instead of window
+        if (viewport) {
+            viewport.addEventListener('scroll', handleScroll, { passive: true })
+        }
 
         // Cleanup
         return () => {
@@ -86,7 +93,9 @@ export default function MagneticButton({
                 magnetButton.removeEventListener('mouseleave', handleMouseLeave)
             }
             window.removeEventListener('resize', handleResize)
-            window.removeEventListener('scroll', handleScroll)
+            if (viewport) {
+                viewport.removeEventListener('scroll', handleScroll)
+            }
             
             if (rafRef.current) {
                 cancelAnimationFrame(rafRef.current)
