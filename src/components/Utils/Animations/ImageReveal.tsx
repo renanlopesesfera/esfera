@@ -8,10 +8,7 @@ import { gsap } from 'gsap/dist/gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
-// Register plugins only when needed
-if (typeof window !== 'undefined') {
-	gsap.registerPlugin(ScrollTrigger)
-}
+gsap.registerPlugin(ScrollTrigger)
 
 interface ImageRevealProps {
     src: string

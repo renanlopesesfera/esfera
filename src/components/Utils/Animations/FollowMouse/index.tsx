@@ -1,5 +1,4 @@
 // libraries
-import clsx from 'clsx'
 import { useLenis } from 'lenis/react'
 import { useRef } from 'react'
 import gsap from 'gsap'

@@ -34,12 +34,11 @@ export default function Counter({ number, className }: CounterProps) {
 					modifiers: {
 						textContent: (value) => formatBrazilianNumber(value)
 					},
-					scrollTrigger: {
-						trigger: item.current,
-						start: 'top 90%',
-						toggleActions: 'play none none none',
-						//markers: true
-					}
+				scrollTrigger: {
+					trigger: item.current,
+					start: 'top 90%',
+					toggleActions: 'play none none none'
+				}
 				}
 			)
 		}

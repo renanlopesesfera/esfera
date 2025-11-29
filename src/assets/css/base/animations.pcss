@@ -64,6 +64,15 @@
             @apply will-change-transform;
         }
     }
+
+    &.intro-home {
+        @apply overflow-visible;
+
+        .split-line {
+            @apply overflow-visible;
+            clip-path: inset(0 0 -1em 0);
+        }
+    }
 }
 
 .block-line-wrapper {
@@ -95,12 +104,15 @@
     0% {
         transform: scaleY(0) translateY(0);
     }
+
     30% {
         transform: scaleY(1) translateY(0);
     }
+
     60% {
         transform: translateY(102%) scaleY(1);
     }
+    
     100% {
         transform: translateY(102%) scaleY(1);
     }

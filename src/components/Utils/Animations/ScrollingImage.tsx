@@ -53,8 +53,7 @@ export default function ScrollingImage({
                 scrollTrigger: {
                     trigger: trigger,
                     scrub: 3,
-                    end: 'bottom top',
-                    //markers: true
+                    end: 'bottom top'
                 }
             })
         }, 50)

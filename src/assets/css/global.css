@@ -9,3 +9,5 @@
 @import './base/buttons.pcss';
 @import './base/rich-text.pcss';
 @import './base/animations.pcss';
+
+@import './components/preloader.pcss';

@@ -2,6 +2,7 @@
     body,
     html {
         @apply font-body leading-relaxed text-base font-normal not-italic bg-white scroll-smooth w-full wrap-break-word tracking-tight 2xl:text-[1vw] text-black;
+        text-rendering: optimizeSpeed;
     }
 
     section {
@@ -23,3 +24,28 @@
         }
     }
 }
+
+/*
+html,
+body {
+    min-height: 100vh;
+    height: auto;
+    width: 100vw;
+    overscroll-behavior: none;
+    overflow: hidden !important;
+}
+
+#viewport {
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100vh;
+    width: 100vw;
+    overscroll-behavior: none;
+}
+  
+#main-content {
+    min-height: 100vh;
+    min-height: 100svh;
+}
+*/

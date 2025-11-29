@@ -85,7 +85,9 @@ export default function Portfolio() {
 			end: `+=${pinDuration}`,
 			pin: true,
 			pinSpacing: true,
-			anticipatePin: 1
+			pinType: 'fixed',
+			anticipatePin: 1,
+			invalidateOnRefresh: false
 		})
 
 		ScrollTrigger.create({
@@ -93,7 +95,7 @@ export default function Portfolio() {
 			start: 'top top',
 			end: `+=${pinDuration}`,
 			scrub: true,
-			anticipatePin: 1,
+			invalidateOnRefresh: false,
 			onUpdate: (self) => {
 				const progress = self.progress
 
@@ -142,21 +144,16 @@ export default function Portfolio() {
 			}
 		})
 
-		return () => {
-			ScrollTrigger.getAll().forEach(trigger => {
-				if (trigger.vars.trigger === containerRef.current) trigger.kill()
-			})
-		}
 	}, { scope: containerRef, dependencies: [projects.length] })
 
 	return (
 		<section
-			className='bg-black flex items-center justify-center overflow-hidden h-lvh'
+			className='bg-black flex items-center justify-center overflow-hidden h-[calc(var(--vh)*100)]'
 			ref={containerRef}
 		>
 
 			<div
-				className='absolute inset-0 w-full h-lvh opacity-50'
+				className='absolute inset-0 w-full h-[calc(var(--vh)*100)] opacity-50'
 				ref={bgRef}
 			>
 				{projects.map((item, i) => (

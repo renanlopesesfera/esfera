@@ -4,18 +4,16 @@
 import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { SplitText } from 'gsap/dist/SplitText'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
-// svg
-import PreloaderSvg from '@/assets/svg/preloader.svg'
+gsap.registerPlugin(SplitText)
 
 export default function Preloader() {
 
     const preloaderRef = useRef<HTMLElement>(null)
     const videoContainerRef = useRef<HTMLDivElement>(null)
-    const videoRef = useRef<HTMLVideoElement>(null)
-
     const pathname = usePathname()
 
     useGSAP(() => {
@@ -30,6 +28,9 @@ export default function Preloader() {
 
         // initial part of the timeline
         const tl = gsap.timeline({
+            onStart: () => {
+                document.body.style.overflow = 'hidden'
+            },
             onComplete: () => {
                 if (pathname === '/') {
                     tlHome.play()
@@ -46,7 +47,7 @@ export default function Preloader() {
         })
 
         tl.to('[data-prealoder-numbers] > img', {
-            yPercent: -92.525,
+            yPercent: -92.475,
             duration: 3,
             ease: 'power4.inOut',
             stagger: .3
@@ -56,7 +57,60 @@ export default function Preloader() {
         // depending on the page, we'll use the appropriate timeline
 
         // home timeline
-        const tlHome = gsap.timeline({ paused: true })
+        const tlHome = gsap.timeline({ 
+            paused: true,
+            onComplete: () => {
+                const split = new SplitText('[data-preloader-title]', { 
+                    type: 'lines, words, chars',
+                    linesClass: 'split-line'
+                })
+
+                const tlHomeFadeOut = gsap.timeline({
+                    delay: 2,
+                    onComplete: () => {
+                        document.body.style.overflow = ''
+                    }
+                })
+
+                tlHomeFadeOut.to('[data-preloader-video]', {
+                    yPercent: -105,
+                    duration: .6,
+                    ease: 'power2.inOut'
+                })
+
+                tlHomeFadeOut.to(split.chars, {
+                    yPercent: -120,
+                    duration: .5,
+                    stagger: .025,
+                    ease: 'power2.inOut'
+                }, '<')
+
+                tlHomeFadeOut.to('[data-preloader-bg] > div', {
+                    yPercent: -110,
+                    duration: 1,
+                    stagger: 0.2,
+                    ease: 'power2.inOut'
+                }, '<')
+
+                tlHomeFadeOut.to(preloaderRef.current, {
+                    clipPath: 'inset(0% 0% 100% 0%)',
+                    duration: .6,
+                    ease: 'power2.inOut'
+                }, '-=.6')
+
+                tlHomeFadeOut.to(preloaderRef.current, {
+                    backgroundColor: 'transparent',
+                    duration: 0,
+                    ease: 'none'
+                }, '-=.6')
+
+                tlHomeFadeOut.to(preloaderRef.current, {
+                    autoAlpha: 0,
+                    duration: 0,
+                    ease: 'none'
+                })
+            }
+        })
 
         tlHome.to('[data-prealoder-numbers]', {
             autoAlpha: 0,
@@ -90,7 +144,12 @@ export default function Preloader() {
         }, '<')
 
         // internal timeline
-        const tlInternal = gsap.timeline({ paused: true })
+        const tlInternal = gsap.timeline({
+            paused: true,
+            onComplete: () => {
+                document.body.style.overflow = ''
+            }
+        })
         
         tlInternal.to(preloaderRef, {
             autoAlpha: 0,
@@ -107,12 +166,12 @@ export default function Preloader() {
             ref={preloaderRef}
             className='fixed z-9999 inset-0 bg-white'
             data-preloader
-            data-lenis-prevent
         >
+
 			<div className='base-container'>
                 <div className='flex items-center justify-center h-svh'>
                     <div
-                        className='relative overflow-hidden flex justify-center gap-2 w-auto h-[14.9svh]'
+                        className='relative flex justify-center gap-2 w-auto h-[14.9svh]'
                         data-prealoder-numbers
                     >
                         {Array.from({ length: 2 }).map((_, i) => (
@@ -134,7 +193,7 @@ export default function Preloader() {
                 data-preloader-content
             >
                 <div className='base-container'>
-                    <div className='flex flex-col md:flex-row-reverse items-center justify-center h-svh gap-10 md:gap-20'>
+                    <div className='flex flex-col md:flex-row-reverse items-center justify-center h-svh gap-5 sm:gap-10 md:gap-20'>
 
                         <div 
                             ref={videoContainerRef}
@@ -142,12 +201,12 @@ export default function Preloader() {
                             data-preloader-video-wrapper
                         >
                             <video
-                                ref={videoRef}
                                 loop
                                 muted
                                 playsInline
                                 autoPlay
-                                className='w-full h-full object-cover'
+                                className='w-full h-full object-cover will-change-transform'
+                                data-preloader-video
                             >
                                 <source
                                     src='/videos/intro.mp4'
@@ -157,7 +216,7 @@ export default function Preloader() {
                         </div>
 
                         <p
-                            className='text-60 opacity-0 will-change-transform'
+                            className='text-60 opacity-0 reveal-text intro-home text-center md:text-left'
                             data-preloader-title
                         >
                             Somos uma <br />
@@ -167,6 +226,15 @@ export default function Preloader() {
                     </div>
                 </div>
             </div>
+
+            <div
+				className='fixed z-97 inset-0 pointer-events-none'
+				data-preloader-bg
+			>
+				<div className='absolute z-1 top-0 left-0 w-full h-[110vh] translate-y-full bg-yellow' />
+				<div className='absolute z-2 top-0 left-0 w-full h-[110vh] translate-y-full bg-black' />
+				<div className='absolute z-3 top-0 left-0 w-full h-[110vh] translate-y-full bg-white' />
+			</div>
 
 		</aside>
 	)

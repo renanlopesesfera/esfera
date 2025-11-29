@@ -25,6 +25,12 @@ export default function Menu() {
 
 	const headerRef = useRef<HTMLDivElement>(null)
 	const menuAnimationRef = useRef<gsap.core.Timeline | null>(null)
+	const scrollStateRef = useRef({
+		lastScroll: 0,
+		isScrollingUp: false,
+		isInteracting: false,
+		hideTimeout: null as NodeJS.Timeout | null
+	})
 	const lenis = useLenis()
 	const pathname = usePathname()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -48,9 +54,9 @@ export default function Menu() {
 					pointerEvents: 'none'
 				})
 
-				gsap.set('[data-top-menu] [data-top-menu-button]', { clearProps: 'all' })
-				gsap.set('[data-top-menu] [data-top-menu-social] a', { clearProps: 'all' })
-				gsap.set('[data-top-menu] [data-top-menu-divider]', { clearProps: 'all' })
+				gsap.set('[data-top-menu-button]', { clearProps: 'all' })
+				gsap.set('[data-top-menu-social] a', { clearProps: 'all' })
+				gsap.set('[data-top-menu-divider]', { clearProps: 'all' })
 			}
 		})
 	
@@ -67,25 +73,25 @@ export default function Menu() {
 		ease: 'power2.inOut'
 	}, '-=1')
 
-	menuAnimationRef.current.to('[data-top-menu] [data-top-menu-social] a', {
+	menuAnimationRef.current.to('[data-top-menu-social] a', {
 		color: 'var(--color-gray-dark)',
 		duration: .3,
 		ease: 'power2.inOut'
 	}, '<')
 
-	menuAnimationRef.current.to('[data-top-menu] [data-top-menu-divider]', {
+	menuAnimationRef.current.to('[data-top-menu-divider]', {
 		backgroundColor: 'var(--color-gray-dark)',
 		duration: .3,
 		ease: 'power2.inOut',
 	}, '<')
 
-	menuAnimationRef.current.to('[data-top-menu] [data-top-menu-button]', {
+	menuAnimationRef.current.to('[data-top-menu-button]', {
 		color: 'var(--color-gray-dark)',
 		duration: .3,
 		ease: 'power2.inOut',
 	}, '<')
 
-	menuAnimationRef.current.to('[data-fs-menu] [data-fs-menu-list] > li', {
+	menuAnimationRef.current.to('[data-fs-menu-list] > li', {
 		translateY: 0,
 		opacity: 1,
 		duration: .6,
@@ -93,11 +99,23 @@ export default function Menu() {
 		stagger: 0.05
 	}, '-=.75')
 
-	menuAnimationRef.current.to('[data-fs-menu] [data-fs-menu-contact]', {
+	menuAnimationRef.current.to('[data-top-menu-button-lines]', {
+		opacity: 0,
+		duration: .3,
+		ease: 'power2.inOut',
+	}, '<')
+
+	menuAnimationRef.current.to('[data-fs-menu-contact]', {
 		opacity: 1,
 		duration: .6,
 		ease: 'power2.inOut',
 	}, '<')
+
+	menuAnimationRef.current.to('[data-top-menu-button-lines-close]', {
+		opacity: 1,
+		duration: .3,
+		ease: 'power2.inOut',
+	}, '<+=.3')
 		
 	}, {
 		scope: headerRef
@@ -136,34 +154,93 @@ export default function Menu() {
 	useEffect(() => {
 		if (!lenis) return
 
-		let lastScroll = 0
+		const state = scrollStateRef.current
+
+		const showMenu = (menu: Element) => {
+			state.isScrollingUp = true
+			if (state.hideTimeout) {
+				clearTimeout(state.hideTimeout)
+				state.hideTimeout = null
+			}
+			menu.classList.add('scrolling-up')
+		}
+
+		const hideMenu = (menu: Element, immediate = false) => {
+			state.isScrollingUp = false
+			if (state.hideTimeout) clearTimeout(state.hideTimeout)
+
+			const hide = () => menu.classList.remove('scrolling-up')
+
+			if (immediate || state.isInteracting) {
+				if (!state.isInteracting) hide()
+			} else {
+				state.hideTimeout = setTimeout(() => {
+					if (!state.isInteracting) hide()
+				}, 100)
+			}
+		}
 
 		const handleScroll = ({ scroll }: { scroll: number }) => {
-			const stickyMenu = document.querySelector('[data-sticky-menu]')
-			if (!stickyMenu) return
+			const menu = document.querySelector('[data-sticky-menu]')
+			if (!menu) return
 
-			// Don't hide sticky menu when fullscreen menu is open
 			if (isMenuOpen) {
-				stickyMenu.classList.add('scrolling-up')
+				menu.classList.add('scrolling-up')
 				return
 			}
 
-			const scrollingUp = scroll < lastScroll
-			const isScrolled = scroll >= 300
+			const isAboveThreshold = scroll < 500
+			const scrollDiff = state.lastScroll - scroll
+			const isSignificantScroll = Math.abs(scrollDiff) > 3
 
-			if (scrollingUp && isScrolled) {
-				stickyMenu.classList.add('scrolling-up')
-			} else {
-				stickyMenu.classList.remove('scrolling-up')
+			if (isAboveThreshold) {
+				hideMenu(menu, true)
+				state.lastScroll = scroll
+				return
 			}
 
-			lastScroll = scroll
+			if (isSignificantScroll) {
+				const isScrollingUp = scrollDiff > 0
+
+				if (isScrollingUp && !state.isScrollingUp) {
+					showMenu(menu)
+				} else if (!isScrollingUp && state.isScrollingUp) {
+					hideMenu(menu)
+				}
+
+				state.lastScroll = scroll
+			}
 		}
+
+		const handleInteractionStart = () => {
+			state.isInteracting = true
+			if (state.hideTimeout) {
+				clearTimeout(state.hideTimeout)
+				state.hideTimeout = null
+			}
+		}
+
+		const handleInteractionEnd = () => {
+			state.isInteracting = false
+		}
+
+		const menu = document.querySelector('[data-sticky-menu]')
+		
+		menu?.addEventListener('mouseenter', handleInteractionStart)
+		menu?.addEventListener('mouseleave', handleInteractionEnd)
+		menu?.addEventListener('touchstart', handleInteractionStart)
+		menu?.addEventListener('touchend', handleInteractionEnd)
 
 		lenis.on('scroll', handleScroll)
 
 		return () => {
 			lenis.off('scroll', handleScroll)
+			if (state.hideTimeout) clearTimeout(state.hideTimeout)
+			
+			menu?.removeEventListener('mouseenter', handleInteractionStart)
+			menu?.removeEventListener('mouseleave', handleInteractionEnd)
+			menu?.removeEventListener('touchstart', handleInteractionStart)
+			menu?.removeEventListener('touchend', handleInteractionEnd)
 		}
 	}, [lenis, isMenuOpen])
 
@@ -261,8 +338,26 @@ export default function Menu() {
 									onClick={toggleFsMenu}
 									data-top-menu-button
 								>
-									<span className='block w-full h-px bg-current group-hover:bg-black transition-colors duration-200' />
-									<span className='block w-full h-px bg-current group-hover:bg-black transition-colors duration-200' />
+
+									{Array.from({ length: 2 }).map((_, i) => (
+										<span
+											key={i}
+											className='block w-full h-px bg-current group-hover:bg-black transition-colors duration-200'
+											data-top-menu-button-lines
+										/>
+									))}
+
+									<span
+										className='absolute inset-0 w-full h-full opacity-0'
+										data-top-menu-button-lines-close
+									>
+
+										<span className='absolute block top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 rotate-45 h-px bg-current group-hover:bg-black transition-colors duration-200' />
+
+										<span className='absolute block top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 -rotate-45 h-px bg-current group-hover:bg-black transition-colors duration-200' />
+
+									</span>
+
 								</button>
 							</MagneticButton>
 						</li>
@@ -278,7 +373,7 @@ export default function Menu() {
 		<div ref={headerRef}>
 
 			<section
-				className='fixed top-0 left-0 w-full z-100 py-10 -translate-y-[105%] [&.scrolling-up]:translate-y-0! transition-transform duration-600'
+				className='fixed top-0 left-0 w-full z-100 py-6 sm:py-10 -translate-y-[105%] [&.scrolling-up]:translate-y-0! transition-transform duration-600 bg-transparent'
 				data-sticky-menu
 			>
 

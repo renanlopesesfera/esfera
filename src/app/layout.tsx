@@ -136,15 +136,13 @@ export default function RootLayout({
 
 				<div id='overlay' />
 
-				<Menu />
+				{/*<Preloader />*/}
 
-				<Preloader />
+				<Menu />
 
 				<SmoothScroller>
 
-					<div id='main-content'>
-						{children}
-					</div>
+					{children}
 
 					<Footer />
 

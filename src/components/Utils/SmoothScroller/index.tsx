@@ -31,8 +31,7 @@ export default function SmoothScroller({
             root
             options={{
                 autoRaf: false,
-                wheelMultiplier: .625,
-                
+                wheelMultiplier: .75,
             }}
             ref={lenisRef}
         >
