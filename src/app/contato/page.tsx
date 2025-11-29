@@ -4,6 +4,7 @@ import Link from 'next/link'
 // components
 import MagneticButton from '@/components/Utils/Animations/MagneticButton'
 import { Form, Input, InputHidden, Textarea, Checkbox, Submit } from '@/components/Form'
+import Map from './Map'
 
 // utils
 import { phone, email } from '@/utils/functions'
@@ -163,17 +164,7 @@ export default function Contact() {
 				</div>
 			</section>
 
-			<section className='bg-white w-full overflow-hidden h-[60svh]'>
-				<iframe
-					src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.4275057544082!2d-49.291549324002624!3d-25.457396677544395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce385f11942c7%3A0x2bb39b9ff1afef0f!2sAg%C3%AAncia%20Esfera!5e0!3m2!1spt-BR!2sbr!4v1764455520806!5m2!1spt-BR!2sbr'
-					width='600'
-					height='450'
-					allowFullScreen
-					loading='lazy'
-					referrerPolicy='no-referrer-when-downgrade'
-					className='w-full h-full grayscale-100 border-none!'
-				/>
-			</section>
+			<Map />
 
 		</main>
 	)
