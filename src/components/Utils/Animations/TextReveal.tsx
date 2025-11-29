@@ -118,6 +118,8 @@ export default function TextReveal({
                 tl.pause()
 
                 ScrollTrigger.create({
+                    scroller: document.getElementById('viewport') as HTMLElement,
+                    scroller: document.getElementById('viewport') as HTMLElement,
                     trigger: containerRef.current,
                     start: 'top 90%',
                     once: true,

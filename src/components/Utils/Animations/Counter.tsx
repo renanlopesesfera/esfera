@@ -35,6 +35,7 @@ export default function Counter({ number, className }: CounterProps) {
 						textContent: (value) => formatBrazilianNumber(value)
 					},
 				scrollTrigger: {
+					scroller: document.getElementById('viewport') as HTMLElement,
 					trigger: item.current,
 					start: 'top 90%',
 					toggleActions: 'play none none none'

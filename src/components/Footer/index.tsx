@@ -14,7 +14,7 @@ export default function Footer() {
 	const year = getYear(new Date().getFullYear().toString())
 
 	return (
-		<footer className='pb-8 sm:pb-10 pt-14 sm:pt-17 bg-white'>
+		<footer className='pb-35 md:pb-10 pt-14 sm:pt-17 bg-white'>
 			<div className='base-container'>
 
 				<div className='flex flex-col xl:flex-row xl:items-center xl:justify-between gap-2'>

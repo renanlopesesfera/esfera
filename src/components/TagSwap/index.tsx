@@ -28,6 +28,7 @@ export default function TagSwap() {
         })
 
         ScrollTrigger.create({
+            scroller: document.getElementById('viewport') as HTMLElement,
             trigger: containerRef.current,
             start: 'top 50%',
             end: 'bottom 70%',

@@ -60,6 +60,7 @@ export default function ImageReveal({
         }, '=-1')
 
         ScrollTrigger.create({
+            scroller: document.getElementById('viewport') as HTMLElement,
             trigger: containerRef.current,
             start: '0% 120%',
             end: '100% -20%',

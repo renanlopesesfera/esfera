@@ -37,6 +37,7 @@ export default function AnimatedText({
 
         animRef.current = gsap.from(splitRef.current.chars, {
             scrollTrigger: {
+                scroller: document.getElementById('viewport') as HTMLElement,
                 trigger: item.current,
                 toggleActions: 'restart pause resume reverse',
                 start: 'top 85%'

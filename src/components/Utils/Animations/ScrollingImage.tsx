@@ -51,6 +51,7 @@ export default function ScrollingImage({
             gsap.from(children, {
                 y: size,
                 scrollTrigger: {
+                    scroller: document.getElementById('viewport') as HTMLElement,
                     trigger: trigger,
                     scrub: 3,
                     end: 'bottom top'

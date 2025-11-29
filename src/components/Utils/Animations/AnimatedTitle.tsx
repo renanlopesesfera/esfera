@@ -37,6 +37,7 @@ export default function AnimatedTitle({
 				backgroundPositionX: 0,
 				ease: 'none',
 				scrollTrigger: {
+					scroller: document.getElementById('viewport') as HTMLElement,
 					trigger: line,
 					scrub: true,
 					start: 'top 75%',

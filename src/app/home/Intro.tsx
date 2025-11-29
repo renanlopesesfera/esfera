@@ -120,6 +120,7 @@ export default function Intro() {
         updateAnimation()
 
         const bgScroll = ScrollTrigger.create({
+            scroller: document.getElementById('viewport') as HTMLElement,
             trigger: wrapperRef.current,
             start: 'top top',
             end: '+=100%',
@@ -129,6 +130,7 @@ export default function Intro() {
         })
 
         const infosAnimation = ScrollTrigger.create({
+            scroller: document.getElementById('viewport') as HTMLElement,
             trigger: wrapperRef.current,
             start: 'top top',
             end: '+=20%',

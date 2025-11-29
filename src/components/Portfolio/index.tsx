@@ -80,6 +80,7 @@ export default function Portfolio() {
 		}
 
 		ScrollTrigger.create({
+			scroller: document.getElementById('viewport') as HTMLElement,
 			trigger: containerRef.current,
 			start: 'top top',
 			end: `+=${pinDuration}`,
@@ -91,6 +92,7 @@ export default function Portfolio() {
 		})
 
 		ScrollTrigger.create({
+			scroller: document.getElementById('viewport') as HTMLElement,
 			trigger: containerRef.current,
 			start: 'top top',
 			end: `+=${pinDuration}`,
@@ -148,12 +150,12 @@ export default function Portfolio() {
 
 	return (
 		<section
-			className='bg-black flex items-center justify-center overflow-hidden h-[calc(var(--vh)*100)]'
+			className='bg-black flex items-center justify-center overflow-hidden h-svh'
 			ref={containerRef}
 		>
 
 			<div
-				className='absolute inset-0 w-full h-[calc(var(--vh)*100)] opacity-50'
+				className='absolute inset-0 w-full h-svh opacity-50'
 				ref={bgRef}
 			>
 				{projects.map((item, i) => (
