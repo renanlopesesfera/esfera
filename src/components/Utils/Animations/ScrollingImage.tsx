@@ -53,26 +53,20 @@ export default function ScrollingImage({
                 scrollTrigger: {
                     scroller: document.getElementById('viewport') as HTMLElement,
                     trigger: trigger,
-                    scrub: 3,
+                    scrub: 2,
                     end: 'bottom top'
                 }
             })
         }, 50)
 
         return () => clearTimeout(timer)
+
 	}, { dependencies: [pathname] })
 
     return (
         <div
             ref={item}
-            style={{
-                position: 'absolute',
-                overflow: 'hidden',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%'
-            }}
+            className='absolute overflow-hidden top-0 left-0 w-full h-full'
         >
             {children}
         </div>
