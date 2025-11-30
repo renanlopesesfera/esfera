@@ -1,13 +1,13 @@
 // components
-import Banner from './(fragments)/Banner'
-import MultiText from './(fragments)/MultiText'
-import FullscreenMedia from './(fragments)/FullscreenMedia'
-import BigMedia from './(fragments)/BigMedia'
-import DoubleSlider from './(fragments)/DoubleSlider'
-import ExpandingGrid from './(fragments)/ExpandingGrid'
-import TwoMedia from './(fragments)/TwoMedia'
-import StoriesSlider from './(fragments)/StoriesSlider'
-import NextProject from './(fragments)/NextProject'
+import Banner from '@/components/PortfolioBlocks/Banner'
+import MultiText from '@/components/PortfolioBlocks/MultiText'
+import FullscreenMedia from '@/components/PortfolioBlocks/FullscreenMedia'
+import BigMedia from '@/components/PortfolioBlocks/BigMedia'
+import DoubleSlider from '@/components/PortfolioBlocks/DoubleSlider'
+import ExpandingGrid from '@/components/PortfolioBlocks/ExpandingGrid'
+import TwoMedia from '@/components/PortfolioBlocks/TwoMedia'
+import StoriesSlider from '@/components/PortfolioBlocks/StoriesSlider'
+import NextProject from '@/components/PortfolioBlocks/NextProject'
 
 export default function Project() {
 
@@ -21,8 +21,9 @@ export default function Project() {
         year: 2025,
         area: 'Automotivo e Industrial'
     }
+
     return (
-        <main>
+        <main className='portfolio-internal-page'>
 
             <Banner
                 image={data.image}
