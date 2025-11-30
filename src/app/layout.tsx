@@ -140,7 +140,7 @@ export default function RootLayout({
 
 				<div id='overlay' />
 
-				{/* <Preloader /> */}
+				<Preloader />
 
 				<PageTransition>
 					<SmoothScroller>
