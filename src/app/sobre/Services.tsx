@@ -4,10 +4,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCards, Mousewheel, Autoplay } from 'swiper/modules'
 import 'swiper/css'
-import 'swiper/css/navigation'
 import 'swiper/css/effect-cards'
-import 'swiper/css/mousewheel'
-import 'swiper/css/autoplay'
 
 // components
 import TextReveal from '@/components/Utils/Animations/TextReveal'

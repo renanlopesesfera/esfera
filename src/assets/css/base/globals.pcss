@@ -34,16 +34,14 @@
         @apply absolute z-0 inset-0 object-cover w-full h-full;
     }
 
-    .portfolio-internal-page {
-        .swiper-scrollbar {
-            @apply relative! overflow-hidden! left-auto! bottom-auto! top-auto! w-full! h-1! bg-gray-lightest! rounded-xl! mt-6;
+    .swiper-scrollbar {
+        @apply relative! overflow-hidden! left-auto! bottom-auto! top-auto! w-full! h-1! bg-gray-lightest! rounded-xl! mt-6;
 
-            div {
-                @apply bg-yellow!;
+        div {
+            @apply bg-yellow!;
 
-                &:after {
-                    @apply content-[''] absolute top-0 right-0 w-screen h-full bg-yellow;
-                }
+            &:after {
+                @apply content-[''] absolute top-0 right-0 w-screen h-full bg-yellow;
             }
         }
     }

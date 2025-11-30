@@ -9,7 +9,6 @@ import { Navigation, Scrollbar, FreeMode, Mousewheel } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/scrollbar'
-import 'swiper/css/free-mode'
 
 // components
 import Section from './Section'
