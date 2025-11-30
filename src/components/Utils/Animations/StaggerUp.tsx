@@ -19,41 +19,49 @@ export default function StaggerUp({
 	infinite = false
 }: StaggerUpProps) {
 	
-	const item = useRef(null)
+	const item = useRef<HTMLDivElement>(null)
 
 	useGSAP(() => {
-		if (item.current) {
-		
-			const children = (item.current as HTMLElement).children
+		if (!item.current) return
 
-			gsap.set(children, {
-				opacity: 0,
-				y: '10vh'
-			})
+		const viewport = document.getElementById('viewport')
+		if (!viewport) return
 
-			ScrollTrigger.batch(children, {
-				start: '-50% 100%',
-				scroller: document.getElementById('viewport') as HTMLElement,
-				onEnter: elements => {
+		const children = Array.from(item.current.children) as HTMLElement[]
+		if (children.length === 0) return
+
+		gsap.set(children, {
+			opacity: 0,
+			y: '20vh'
+		})
+
+		ScrollTrigger.batch(children, {
+			start: '-50% 100%',
+			scroller: viewport,
+			onEnter: elements => {
+				gsap.to(elements, {
+					opacity: 1,
+					y: 0,
+					stagger: 0.125,
+					duration: .5
+				})
+			},
+			...(infinite && {
+				onLeaveBack: elements => {
 					gsap.to(elements, {
-						opacity: 1,
-						y: 0,
+						opacity: 0,
+						y: '20vh',
 						stagger: 0.125,
 						duration: .5
 					})
-				},
-				...(infinite && {
-					onLeaveBack: elements => {
-						gsap.to(elements, {
-							opacity: 0,
-							y: '10vh',
-							stagger: 0.125,
-							duration: .5
-						})
-					}
-				})
+				}
 			})
-		}
+		})
+
+		ScrollTrigger.refresh()
+	}, {
+		scope: item,
+		dependencies: [infinite]
 	})
 
 	return (
