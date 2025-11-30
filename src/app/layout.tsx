@@ -26,8 +26,17 @@ export const metadata: Metadata = {
 	title: 'Agência Esfera',
 	description: 'Transformamos ideias em experiências extraordinárias. Eventos corporativos 360º que conectam pessoas e resultados.',
 	icons: {
-		icon: '/favicon/icon.svg'
+		icon: [
+			{ url: '/icon.svg', type: 'image/svg+xml' },
+			{ url: '/icon.png', type: 'image/png', sizes: '32x32' },
+			{ url: '/icon.png', type: 'image/png', sizes: '96x96' },
+			{ url: '/favicon.ico', sizes: 'any' }
+		],
+		apple: [
+			{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }
+		]
 	},
+	manifest: '/manifest.json',
 	openGraph: {
 		title: 'Agência Esfera',
 		description: 'Transformamos ideias em experiências extraordinárias. Eventos corporativos 360º que conectam pessoas e resultados.',
@@ -35,7 +44,7 @@ export const metadata: Metadata = {
 		siteName: 'Agência Esfera',
 		images: [
 			{
-				url: 'https://agenciaesfera.com.br/img/og-image.jpg',
+				url: 'https://agenciaesfera.com.br/img/og-image.png',
 				width: 1280,
 				height: 628,
 				alt: 'Agência Esfera'
@@ -122,7 +131,47 @@ export default function RootLayout({
 		<html lang='pt-BR' className={clsx(poppins.className, antonio.className)}>
 
 			<head>
-				<meta name='apple-mobile-web-app-title' content='Esfera' />
+
+				<meta
+					name='apple-mobile-web-app-title'
+					content='Esfera'
+				/>
+
+				<link
+					rel='icon'
+					type='image/svg+xml'
+					href='/icon.svg'
+				/>
+
+				<link
+					rel='icon'
+					type='image/png'
+					sizes='32x32'
+					href='/icon.png'
+				/>
+
+				<link
+					rel='icon'
+					type='image/png'
+					sizes='96x96'
+					href='/icon.png'
+				/>
+
+				<link
+					rel='shortcut icon'
+					href='/favicon.ico'
+				/>
+
+				<link
+					rel='apple-touch-icon'
+					href='/apple-icon.png'
+					sizes='180x180'
+				/>
+
+				<link
+					rel='manifest'
+					href='/manifest.json'
+				/>
 
 				<Script
 					id='jsonld'
