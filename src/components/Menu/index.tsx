@@ -478,7 +478,7 @@ export default function Menu() {
 									<Link
 										href={item.href}
 										className={clsx(
-											'font-heading font-semibold uppercase text-7xl',
+											'font-heading font-semibold uppercase text-6xl leading-[.9]',
 											pathname === item.href ? 'text-yellow' : 'text-gray-dark'
 										)}
 										onClick={closeFsMenu}
