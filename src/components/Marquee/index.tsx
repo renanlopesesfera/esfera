@@ -52,7 +52,7 @@ export default function Marquee({
                         alt={item.alt}
                         width={100}
                         height={100}
-                        className='block w-[35vw] md:w-[20vw] xl:w-[15vw] max-h-[20vw] md:max-h-[10vw] xl:max-h-[7vw] h-auto object-contain brightness-0 aspect-video'
+                        className='block w-[35vw] md:w-[20vw] xl:w-[12vw] max-h-[20vw] md:max-h-[10vw] xl:max-h-[6vw] h-auto object-contain brightness-0 aspect-video'
                     />
                 </div>
             ))}

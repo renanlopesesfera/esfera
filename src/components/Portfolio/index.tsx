@@ -14,21 +14,21 @@ export default function Portfolio() {
 
 	const projects = [
 		{
-			href: '#1',
+			href: '/portfolio/intermodal-25',
 			bgImage: '/img/portfolio/01-big.jpg',
 			mainImage: '/img/portfolio/01-small.jpg',
 			textLeft: 'Agrinho 2024',
 			textRight: 'Do Campo à Cidade',
 		},
 		{
-			href: '#2',
+			href: '/portfolio/intermodal-25',
 			bgImage: '/img/portfolio/02-big.jpg',
 			mainImage: '/img/portfolio/02-small.jpg',
 			textLeft: 'John Deere Space',
 			textRight: 'Inovação em grande escala',
 		},
 		{
-			href: '#3',
+			href: '/portfolio/intermodal-25',
 			bgImage: '/img/portfolio/03-big.jpg',
 			mainImage: '/img/portfolio/03-small.jpg',
 			textLeft: 'Convenção Bosch Service 2025',
@@ -197,12 +197,12 @@ export default function Portfolio() {
 
 			<div className='relative z-10 w-full h-full'>
 
-				<div className="absolute z-99 w-full h-full">
+				<div className='absolute z-99 w-full h-full'>
 					{projects.map((item, i) => (
 						<Link
 							key={i}
 							href={item.href}
-							className='absolute inset-0 w-full h-full opacity-0'
+							className='absolute inset-0 w-full h-full opacity-0 pointer-events-auto'
 							style={{ zIndex: projects.length - i }}
 							data-link
 						/>
@@ -252,6 +252,7 @@ export default function Portfolio() {
 						</div>
 					</div>
 				))}
+
 			</div>
 
 		</section>

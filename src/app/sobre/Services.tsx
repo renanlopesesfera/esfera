@@ -1,8 +1,11 @@
 'use client'
 
 // libraries
+import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { EffectCards, Mousewheel, Autoplay } from 'swiper/modules'
+import gsap from 'gsap'
 import 'swiper/css'
 import 'swiper/css/effect-cards'
 
@@ -12,8 +15,46 @@ import AnimatedText from '@/components/Utils/Animations/AnimatedText'
 import FollowMouse from '@/components/Utils/Animations/FollowMouse'
 
 export default function Services() {
+	const pathname = usePathname()
+	const sectionRef = useRef<HTMLElement>(null)
+	const hasScrolledRef = useRef(false)
+
+	useEffect(() => {
+		hasScrolledRef.current = false
+
+		const hash = window.location.hash
+		if (hash !== '#servicos') return
+
+		const timer = setTimeout(() => {
+			if (!sectionRef.current || hasScrolledRef.current) return
+
+			const viewport = document.getElementById('viewport')
+			if (!viewport) return
+
+			const targetRect = sectionRef.current.getBoundingClientRect()
+			const viewportRect = viewport.getBoundingClientRect()
+			const scrollTop = viewport.scrollTop
+			const targetScroll = scrollTop + targetRect.top - viewportRect.top - 20
+
+			gsap.to(viewport, {
+				scrollTop: targetScroll,
+				duration: 1,
+				ease: 'power1.inOut',
+				onComplete: () => {
+					hasScrolledRef.current = true
+				}
+			})
+		}, 600)
+
+		return () => clearTimeout(timer)
+	}, [pathname])
+
     return (
-        <section className='bg-black py-16 sm:py-28 lg:py-32'>
+        <section
+            ref={sectionRef}
+            className='bg-black py-16 sm:py-28 lg:py-32'
+            id='servicos'
+        >
 
             <div className='base-container'>
                 <div className='flex flex-col text-center gap-6 sm:gap-10'>
