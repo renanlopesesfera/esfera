@@ -29,25 +29,24 @@ export default function Counter({
 				return Math.floor(+value).toLocaleString('pt-BR')
 			}
 
-			gsap.fromTo(item.current, 
-				{
-					textContent: 0
+			gsap.set(item.current, {
+				textContent: 0
+			})
+
+			gsap.to(item.current, {
+				textContent: number,
+				duration: 3,
+				ease: 'power2.inOut',
+				modifiers: {
+					textContent: (value) => formatBrazilianNumber(value)
 				},
-				{
-					textContent: number,
-					duration: 3,
-					ease: 'power2.inOut',
-					modifiers: {
-						textContent: (value) => formatBrazilianNumber(value)
-					},
-					scrollTrigger: {
-						scroller: document.getElementById('viewport') as HTMLElement,
-						trigger: item.current,
-						start: 'top 90%',
-						toggleActions: 'play none none none'
-					}
+				scrollTrigger: {
+					scroller: document.getElementById('viewport') as HTMLElement,
+					trigger: item.current,
+					start: 'top 90%',
+					toggleActions: 'play none none reverse'
 				}
-			)
+			})
 		}
 	}, { dependencies: [number] })
 

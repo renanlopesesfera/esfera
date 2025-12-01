@@ -233,7 +233,7 @@ export default function Intro() {
                             <SwiperSlide>
 
                                 <p className='reveal-text text-30 font-heading uppercase font-semibold'>
-                                    Eventos coorporativos para
+                                    Eventos corporativos para
                                 </p>
 
                                 <h2 className='reveal-text font-heading text-100 uppercase tracking-tighter font-semibold mt-2'>

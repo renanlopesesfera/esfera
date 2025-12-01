@@ -1,6 +1,7 @@
 'use client'
 
 // libraries
+import clsx from 'clsx'
 import { useRef, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperType } from 'swiper'
@@ -36,10 +37,10 @@ export default function Testimonials() {
 
     const testimonials = [
         {
-            bgColor: '#35791E',
+            //bgColor: '#35791E',
             logo: '/img/clients/corteva.png',
             logoAlt: 'Corteva',
-            image: '/img/portfolio/01-small.jpg',
+            //image: '/img/portfolio/01-small.jpg',
             text: 'Nunca esqueceremos o dia em que a Esfera nos ajudou a realizar o nosso primeiro evento corporativo. Triplicamos o número de participantes comparado ao ano anterior e a qualidade do evento foi excelente.',
             person: 'Rodrigo B.',
             title: 'Sócio'
@@ -138,30 +139,40 @@ export default function Testimonials() {
                                 className='h-auto!'
                             >
                                 <div
-                                    className='relative overflow-hidden md:flex md:flex-row-reverse md:items-stretch w-full h-full rounded-md md:rounded-lg'
+                                    className={clsx(
+                                        'relative overflow-hidden md:flex md:items-stretch w-full h-full rounded-md md:rounded-lg bg-black',
+                                        item.image && 'md:flex-row-reverse'
+                                    )}
                                     style={{ backgroundColor: item.bgColor }}
                                 >
 
-                                    <div className='relative overflow-hidden block h-[50vw] md:h-auto min-w-full md:min-w-[40%]'>
-                                        <Image
-                                            src={item.image}
-                                            alt={item.logoAlt}
-                                            fill
-                                            className='cover'
-                                            loading='lazy'
-                                            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw'
-                                        />
-                                    </div>
+                                    {item.image && (
+                                        <div className='relative overflow-hidden block h-[50vw] md:h-auto min-w-full md:min-w-[40%]'>
+                                            <Image
+                                                src={item.image}
+                                                alt={item.logoAlt}
+                                                fill
+                                                className='cover'
+                                                loading='lazy'
+                                                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 75vw, 50vw'
+                                            />
+                                        </div>
+                                    )}
 
-                                    <div className='flex flex-col gap-4 text-white p-8 md:p-10 md:h-full md:justify-between'>
+                                    <div className={clsx(
+                                        'flex flex-col gap-4 text-white p-8 md:p-10 md:h-full md:justify-between',
+                                        !item.image && 'md:w-140 md:max-w-full'
+                                    )}>
 
-                                        <Image
-                                            src={item.logo}
-                                            alt={item.logoAlt}
-                                            width={150}
-                                            height={110}
-                                            className='block w-40 h-auto object-contain'
-                                        />
+                                        {item.logo && (
+                                            <Image
+                                                src={item.logo}
+                                                alt={item.logoAlt}
+                                                width={150}
+                                                height={110}
+                                                className='block w-40 h-auto object-contain'
+                                            />
+                                        )}
 
                                         <div className='flex flex-col gap-4 mt-5 md:mt-15 lg:mt-20'>
 
