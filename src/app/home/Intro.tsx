@@ -184,8 +184,21 @@ export default function Intro() {
                             <span className='text-yellow'>agência 360</span>
                         </p>
 
-                        <Link
-                            href='#sobre'
+                        <button
+                            onClick={() => {
+                                const sobreElement = document.getElementById('sobre')
+                                const viewport = document.getElementById('viewport')
+                                
+                                if (sobreElement && viewport) {
+                                    const targetPosition = sobreElement.offsetTop
+                                    
+                                    gsap.to(viewport, {
+                                        scrollTop: targetPosition,
+                                        duration: 1.5,
+                                        ease: 'power1.inOut'
+                                    })
+                                }
+                            }}
                             className='absolute z-4 bottom-10 right-0 animated-scroll group'
                         >
                             <span className='animated-scroll-bar-wrapper'>
@@ -196,7 +209,7 @@ export default function Intro() {
                                 scroll
                             </span>
 
-                        </Link>
+                        </button>
 
                         <Swiper
                             modules={[EffectFade, Autoplay]}
