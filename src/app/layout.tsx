@@ -57,8 +57,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
 	width: 'device-width',
-	initialScale: 1,
-	userScalable: false
+	initialScale: 1
 }
 
 import { Poppins, Antonio } from 'next/font/google'

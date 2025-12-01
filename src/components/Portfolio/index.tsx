@@ -205,6 +205,7 @@ export default function Portfolio() {
 							className='absolute inset-0 w-full h-full opacity-0 pointer-events-auto'
 							style={{ zIndex: projects.length - i }}
 							data-link
+							aria-label={item.textLeft + ' - ' + item.textRight}
 						/>
 					))}
 				</div>

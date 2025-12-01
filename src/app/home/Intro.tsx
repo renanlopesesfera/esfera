@@ -58,8 +58,10 @@ export default function Intro() {
         const activeSlide = allSlides[swiper.activeIndex]
         if (activeSlide) {
             const texts = activeSlide.querySelectorAll('.reveal-text')
+            
             texts.forEach((text: Element) => {
                 text.classList.remove('completed')
+
                 const split = new SplitText(text, { 
                     type: 'lines, words, chars',
                     linesClass: 'split-line'
