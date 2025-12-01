@@ -8,7 +8,9 @@ import { SplitText } from 'gsap/dist/SplitText'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
-gsap.registerPlugin(SplitText)
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(SplitText)
+}
 
 export default function Preloader() {
 

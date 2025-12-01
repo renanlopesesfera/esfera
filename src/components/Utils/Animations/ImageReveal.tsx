@@ -8,9 +8,11 @@ import { gsap } from 'gsap/dist/gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger)
+}
 
-interface ImageRevealProps {
+interface Props {
     src: string
     alt: string
     className?: string
@@ -22,7 +24,7 @@ export default function ImageReveal({
     alt,
     className,
     overlay
-}: ImageRevealProps) {
+}: Props) {
 
     const containerRef = useRef<HTMLDivElement>(null)
     const revealRef = useRef<HTMLDivElement>(null)

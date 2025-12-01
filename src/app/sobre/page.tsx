@@ -142,7 +142,7 @@ export default function About() {
                         {logos.map((item, i) => (
                             <div
                                 key={i}
-                                className='flex items-center justify-center w-full h-auto aspect-square bg-white border border-gray-lighter/25 rounded-md p-12 transition-colors duration-200 hover:border-gray-light group'
+                                className='flex items-center justify-center w-full h-auto aspect-square bg-white border border-gray-lighter/25 rounded-md p-8 xs:p-10 sm:p-12 transition-colors duration-200 hover:border-gray-light group'
                             >
                                 <Image
                                     src={item.src}

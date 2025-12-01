@@ -8,11 +8,13 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Image from 'next/image'
 
-gsap.registerPlugin(ScrollTrigger)
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger)
+}
 
 // components
 import Section from './Section'
-import Video from '@/components/Video'
+//import Video from '@/components/Video'
 
 // interface
 interface Props {

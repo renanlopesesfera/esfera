@@ -13,7 +13,9 @@ import { EffectFade, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 
-gsap.registerPlugin(ScrollTrigger, SplitText)
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger, SplitText)
+}
 
 // components
 import TextReveal from '@/components/Utils/Animations/TextReveal'
@@ -58,7 +60,7 @@ export default function Intro() {
         const activeSlide = allSlides[swiper.activeIndex]
         if (activeSlide) {
             const texts = activeSlide.querySelectorAll('.reveal-text')
-            
+
             texts.forEach((text: Element) => {
                 text.classList.remove('completed')
 

@@ -5,9 +5,11 @@ import { gsap } from 'gsap/dist/gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
+if (typeof window !== 'undefined') {
+	gsap.registerPlugin(ScrollTrigger)
+}
 
-interface StaggerOpacityProps {
+interface Props {
 	className?: string
 	children: React.ReactNode
 	infinite?: boolean
@@ -17,7 +19,7 @@ export default function StaggerOpacity({
 	className,
 	children,
 	infinite = false
-}: StaggerOpacityProps) {
+}: Props) {
 	
 	const item = useRef(null)
 

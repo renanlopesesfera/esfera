@@ -7,7 +7,9 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Image from 'next/image'
 
-gsap.registerPlugin(ScrollTrigger)
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger)
+}
 
 // components
 import TextReveal from '@/components/Utils/Animations/TextReveal'
@@ -68,6 +70,7 @@ export default function Banner({
                     className='object-cover'
                     loading='eager'
                     sizes='100vw'
+                    priority
                 />
             </div>
 

@@ -3,6 +3,11 @@
 // linraries
 import { TransitionRouter } from 'next-transition-router'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger)
+}
 
 interface Props {
     children: React.ReactNode
@@ -44,6 +49,10 @@ export default function PageTransition({
                 onComplete: () => {
                     gsap.set('[data-page-transition]', { clearProps: 'all' })
                     gsap.set('[data-page-transition] > div', { clearProps: 'all' })
+
+                    setTimeout(() => {
+                        ScrollTrigger.refresh()
+                    }, 20)
                 }
             })
 

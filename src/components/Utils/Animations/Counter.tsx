@@ -5,14 +5,20 @@ import { gsap } from 'gsap/dist/gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
+if (typeof window !== 'undefined') {
+	gsap.registerPlugin(ScrollTrigger)
+}
 
-interface CounterProps {
+interface Props {
 	number: number
 	className?: string
 }
 
-export default function Counter({ number, className }: CounterProps) {
+export default function Counter({
+	number,
+	className
+}: Props) {
+	
 	const item = useRef<HTMLSpanElement>(null)
 
 	useGSAP(() => {
@@ -34,12 +40,12 @@ export default function Counter({ number, className }: CounterProps) {
 					modifiers: {
 						textContent: (value) => formatBrazilianNumber(value)
 					},
-				scrollTrigger: {
-					scroller: document.getElementById('viewport') as HTMLElement,
-					trigger: item.current,
-					start: 'top 90%',
-					toggleActions: 'play none none none'
-				}
+					scrollTrigger: {
+						scroller: document.getElementById('viewport') as HTMLElement,
+						trigger: item.current,
+						start: 'top 90%',
+						toggleActions: 'play none none none'
+					}
 				}
 			)
 		}

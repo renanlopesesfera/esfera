@@ -7,8 +7,9 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { SplitText } from 'gsap/dist/SplitText'
 import { useGSAP } from '@gsap/react'
 
-// register plugins
-gsap.registerPlugin(ScrollTrigger, SplitText)
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger, SplitText)
+}
 
 // interface
 interface Props {
@@ -39,97 +40,108 @@ export default function TextReveal({
     useGSAP(() => {
         if (!containerRef.current) return
 
-        splitRefs.current = []
-        lines.current = []
-        blocks.current = []
+        const initAnimation = async () => {
+            // Wait for fonts to load before initializing SplitText
+            if (typeof document !== 'undefined' && document.fonts) {
+                await document.fonts.ready
+            }
 
-        let elements = []
+            if (!containerRef.current) return
 
-        if (containerRef.current.hasAttribute('data-copy-wrapper')) {
-            elements = Array.from(containerRef.current.children)
-        } else {
-            elements = [containerRef.current]
-        }
+            splitRefs.current = []
+            lines.current = []
+            blocks.current = []
 
-        elements.forEach((element) => {
-            const split = SplitText.create(element, {
-                type: 'lines'
-            })
+            let elements = []
 
-            splitRefs.current.push(split)
+            if (containerRef.current.hasAttribute('data-copy-wrapper')) {
+                elements = Array.from(containerRef.current.children)
+            } else {
+                elements = [containerRef.current]
+            }
 
-            split.lines.forEach((line) => {
-                const wrapper = document.createElement('span')
-                wrapper.className = 'block-line-wrapper'
-                line.parentNode?.insertBefore(wrapper, line)
-                wrapper.appendChild(line)
-
-                const block = document.createElement('span')
-                block.className = 'block-revealer'
-                block.style.backgroundColor = blockColor
-                wrapper.appendChild(block)
-
-                lines.current.push(line as HTMLElement)
-                blocks.current.push(block)
-            })
-
-        })
-
-        gsap.set(lines.current, {
-            opacity: 0
-        })
-
-        gsap.set(blocks.current, {
-            scaleX: 0,
-            transformOrigin: 'left center'
-        })
-
-        const createBlockRevealAnimation = (block: HTMLElement, line: HTMLElement, i: number) => {
-            const tl = gsap.timeline({
-                delay: delay + i * stagger,
-            })
-
-            tl.to(block, {
-                scaleX: 1,
-                duration: duration,
-                ease: 'power4.inOut'
-            })
-
-            tl.set(line, {
-                opacity: 1
-            })
-
-            tl.set(block, {
-                transformOrigin: 'right center'
-            })
-
-            tl.to(block, {
-                scaleX: 0,
-                duration: duration,
-                ease: 'power4.inOut'
-            })
-
-            return tl
-        }
-
-        if (animateOnScroll) {
-            blocks.current.forEach((block, i) => {
-                const tl = createBlockRevealAnimation(block, lines.current[i], i)
-                tl.pause()
-
-                ScrollTrigger.create({
-                    scroller: document.getElementById('viewport') as HTMLElement,
-                    trigger: containerRef.current,
-                    start: 'top 90%',
-                    once: true,
-                    onEnter: () => tl.play()
+            elements.forEach((element) => {
+                const split = SplitText.create(element, {
+                    type: 'lines'
                 })
+
+                splitRefs.current.push(split)
+
+                split.lines.forEach((line) => {
+                    const wrapper = document.createElement('span')
+                    wrapper.className = 'block-line-wrapper'
+                    line.parentNode?.insertBefore(wrapper, line)
+                    wrapper.appendChild(line)
+
+                    const block = document.createElement('span')
+                    block.className = 'block-revealer'
+                    block.style.backgroundColor = blockColor
+                    wrapper.appendChild(block)
+
+                    lines.current.push(line as HTMLElement)
+                    blocks.current.push(block)
+                })
+
             })
-        } else {
-            blocks.current.forEach((block, i) => {
-                createBlockRevealAnimation(block, lines.current[i], i)
+
+            gsap.set(lines.current, {
+                opacity: 0
             })
+
+            gsap.set(blocks.current, {
+                scaleX: 0,
+                transformOrigin: 'left center'
+            })
+
+            const createBlockRevealAnimation = (block: HTMLElement, line: HTMLElement, i: number) => {
+                const tl = gsap.timeline({
+                    delay: delay + i * stagger,
+                })
+
+                tl.to(block, {
+                    scaleX: 1,
+                    duration: duration,
+                    ease: 'power4.inOut'
+                })
+
+                tl.set(line, {
+                    opacity: 1
+                })
+
+                tl.set(block, {
+                    transformOrigin: 'right center'
+                })
+
+                tl.to(block, {
+                    scaleX: 0,
+                    duration: duration,
+                    ease: 'power4.inOut'
+                })
+
+                return tl
+            }
+
+            if (animateOnScroll) {
+                blocks.current.forEach((block, i) => {
+                    const tl = createBlockRevealAnimation(block, lines.current[i], i)
+                    tl.pause()
+
+                    ScrollTrigger.create({
+                        scroller: document.getElementById('viewport') as HTMLElement,
+                        trigger: containerRef.current,
+                        start: 'top 90%',
+                        once: true,
+                        onEnter: () => tl.play()
+                    })
+                })
+            } else {
+                blocks.current.forEach((block, i) => {
+                    createBlockRevealAnimation(block, lines.current[i], i)
+                })
+            }
         }
+
+        initAnimation()
 
         return () => {
             splitRefs.current.forEach((split) => split?.revert())

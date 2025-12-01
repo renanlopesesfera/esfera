@@ -8,9 +8,11 @@ import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { SplitText } from 'gsap/dist/SplitText'
 
-gsap.registerPlugin(ScrollTrigger, SplitText)
+if (typeof window !== 'undefined') {
+	gsap.registerPlugin(ScrollTrigger, SplitText)
+}
 
-interface AnimatedTitleProps {
+interface Props {
     children: React.ReactNode
 	style?: 'gray-yellow' | 'gray-black' | 'white-yellow'
     className?: string
@@ -20,35 +22,54 @@ export default function AnimatedTitle({
     children,
 	style = 'gray-yellow',
     className
-}: AnimatedTitleProps) {
+}: Props) {
 
     const item = useRef<HTMLHeadingElement>(null)
+    const splitRef = useRef<SplitText | null>(null)
 
     useGSAP(() => {
 		if (!item.current) return
 
-		const split = new SplitText(item.current, {
-			type: 'lines',
-			tag: 'span'
-		})
+		const initAnimation = async () => {
+			// Wait for fonts to load before initializing SplitText
+			if (typeof document !== 'undefined' && document.fonts) {
+				await document.fonts.ready
+			}
 
-		split.lines.forEach((line) => {
-			gsap.to(line, {
-				backgroundPositionX: 0,
-				ease: 'none',
-				scrollTrigger: {
-					scroller: document.getElementById('viewport') as HTMLElement,
-					trigger: line,
-					scrub: true,
-					start: 'top 75%',
-					end: 'bottom 60%'
-				}
+			if (!item.current) return
+
+			if (splitRef.current) {
+				splitRef.current.revert()
+			}
+
+			splitRef.current = new SplitText(item.current, {
+				type: 'lines',
+				tag: 'span'
 			})
-		})
+
+			splitRef.current.lines.forEach((line) => {
+				gsap.to(line, {
+					backgroundPositionX: 0,
+					ease: 'none',
+					scrollTrigger: {
+						scroller: document.getElementById('viewport') as HTMLElement,
+						trigger: line,
+						scrub: true,
+						start: 'top 75%',
+						end: 'bottom 60%'
+					}
+				})
+			})
+		}
+
+		initAnimation()
 
 		// cleanup
 		return () => {
-			split.revert()
+			if (splitRef.current) {
+				splitRef.current.revert()
+				splitRef.current = null
+			}
 		}
 	})
 
