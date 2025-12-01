@@ -50,14 +50,7 @@ export default function PageTransition({
     const leaveAnimation = async () => {
         return new Promise((resolve) => {
             
-            // kill all ScrollTrigger instances from the current page before leaving
             const allScrollTriggers = ScrollTrigger.getAll()
-
-            //console.log('Killing ScrollTrigger instances on leave:', allScrollTriggers.length)
-
-            allScrollTriggers.forEach((st) => {
-                st.kill()
-            })
 
             const tl = gsap.timeline({
                 onComplete: resolve
@@ -67,7 +60,14 @@ export default function PageTransition({
                 yPercent: -100,
                 duration: 1,
                 stagger: 0.2,
-                ease: 'power2.inOut'
+                ease: 'power2.inOut',
+                onComplete: () => {
+                    // kill all ScrollTrigger instances from the current page before leaving
+                    //console.log('Killing ScrollTrigger instances on leave:', allScrollTriggers.length)
+                    allScrollTriggers.forEach((st) => {
+                        st.kill()
+                    })
+                }
             })
         })
     }

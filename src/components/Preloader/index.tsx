@@ -5,11 +5,12 @@ import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { SplitText } from 'gsap/dist/SplitText'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 if (typeof window !== 'undefined') {
-    gsap.registerPlugin(SplitText)
+    gsap.registerPlugin(SplitText, ScrollTrigger)
 }
 
 export default function Preloader() {
@@ -71,6 +72,11 @@ export default function Preloader() {
                     delay: 2,
                     onComplete: () => {
                         document.body.style.overflow = ''
+                        
+                        // refresh all ScrollTrigger instances
+                        requestAnimationFrame(() => {
+                            ScrollTrigger.refresh(true)
+                        })
                     }
                 })
 
@@ -150,6 +156,11 @@ export default function Preloader() {
             paused: true,
             onComplete: () => {
                 document.body.style.overflow = ''
+                
+                // refresh all ScrollTrigger instances
+                requestAnimationFrame(() => {
+                    ScrollTrigger.refresh(true)
+                })
             }
         })
         
