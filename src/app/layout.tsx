@@ -98,7 +98,7 @@ export default function RootLayout({
 		"address": {
 			"@type": "PostalAddress",
 			"streetAddress": "Av. Rep. Argentina, 1228",
-			"addressLocality": "Água Verde, Curitiba",
+			"addressLocality": "Vila Izabel, Curitiba",
 			"addressRegion": "PR",
 			"postalCode": "80610-260",
 			"addressCountry": "BR"

@@ -32,7 +32,7 @@ export default function Contact() {
 
 							<p className='text-24 my-5 lg:my-10 leading-normal'>
 								Estamos aqui, é so chamar!<br />
-								Entre em contato e marque um café aqui na Esfera!
+								Entre em contato e marque um café na Esfera!
 							</p>
 
 							<div className='bg-yellow p-6 md:p-10 rounded-lg w-full block'>

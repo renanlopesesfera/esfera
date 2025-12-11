@@ -43,9 +43,16 @@ export default function Social() {
                             </h2>
 
                             <p className='text-18'>
-                                <b>A conquista do ISO9001</b> reforça nosso compromisso com a qualidade, a eficiência e a melhoria contínua em todos os nossos processos. Mais do que um selo, é o reconhecimento do nosso esforço diário em oferecer excelência e confiança a cada projeto e cliente.
+                                <b>CERTIFICAÇÃO ISO 20121 - Sistemas de Gestão para a Sustentabilidade de Eventos</b><br /><br />
+
+                                Temos orgulho em ser uma empresa certificada na ISO 20121, a principal norma internacional voltada à gestão sustentável de eventos. Ela estabelece diretrizes para que todas as etapas do projeto, do planejamento à execução, sejam conduzidas com responsabilidade ambiental, social e econômica.<br /><br />
+
+                                Ser uma empresa certificada ISO 20121 significa que adotamos processos que reduzem impactos ambientais, promovem relações éticas com fornecedores, valorizam as pessoas envolvidas e garantem a melhoria contínua de nossas entregas.<br /><br />
+
+                                Na prática, isso se traduz em eventos mais conscientes, eficientes e alinhados às exigências de um mercado que valoriza transparência, governança e legado.
                             </p>
 
+                            {/*
                             <MagneticButton>
                                 <a
                                     href='#'
@@ -56,6 +63,8 @@ export default function Social() {
                                    Saiba mais 
                                 </a>
                             </MagneticButton>
+                            */}
+
                         </div>
 
                     </div>

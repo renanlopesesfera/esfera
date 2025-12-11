@@ -19,7 +19,7 @@ export default function Awards() {
 
                         <TextReveal>
                             <p className='text-18 text-white'>
-                                Grandes conquistas rendem uma coleção de memórias únicas - são 25 prêmios em 26 anos de Esfera.
+                                Grandes conquistas rendem uma coleção de memórias únicas - são mais de 30 prêmios em 26 anos de Esfera.
                             </p>
                         </TextReveal>
 
@@ -35,94 +35,123 @@ export default function Awards() {
                         <StaggerUp>
                             {[
                                 {
-                                    question: 'Premiação Encontro com Fornecedores John Deere',
-                                    answer: `
-                                        <ul>
-                                            <li>Fornecedor Partner 2019</li>
-                                            <li>Prêmio Colaboração - Excelência em Gestão de Custos 2020</li>
-                                            <li>Fornecedor Partner 2021</li>
-                                            <li>Fornecedor Partner 2022</li>
-                                        </ul>
-                                    `
-                                },
-                                {
-                                    question: 'Reconhecimento Parceria Agrishow 2018',
+                                    question: 'Prêmio Caio 2025',
                                     answer: `
                                         <ul>
                                             <li>
-                                                John Deere
+                                                Prata em Operação e Produção de Estandes<br />
+                                                Case: John Deere na Agrishow 2025
+                                            </li>
+                                            <li>
+                                                Prata em Convenção Regional<br />
+                                                Case: Encontro Estadual de Líderes Rurais 2024 | Sistema FAEP/SENAR-PR
+                                            </li>
+                                            <li>
+                                                Prata em Evento Corporativo<br />
+                                                Case: John Deere Space
                                             </li>
                                         </ul>
                                     `
                                 },
                                 {
-                                    question: 'Prêmio Achieving Excellence',
+                                    question: '23ª Mostra de Comunicação do Agro - Associação Brasileira de Marketing Rural e Agro (ABMRA)',
                                     answer: `
                                         <ul>
                                             <li>
-                                                Hall of Fame John Deere 2022
+                                                Bronze em Ações de Dia de Campo<br />
+                                                Case: John Deere Space
                                             </li>
                                         </ul>
                                     `
                                 },
                                 {
-                                    question: '20ª Mostra de Comunicação do Agro ABMRA',
-                                    answer: `
-                                        <ul>
-                                            <li>
-                                                Ouro em Programa e Campanha de Incentivo<br />
-                                                Case: Expo Latin America 2021 - John Deere
-                                            </li>
-                                        </ul>
-                                    `
-                                },
-                                {
-                                    question: 'Prêmio Live 2021',
-                                    answer: `
-                                        <ul>
-                                            <li>
-                                                Ouro em Agência Regional de Brand Experience
-                                            </li>
-                                        </ul>
-                                    `
-                                },
-                                {
-                                    question: 'Prêmio Caio 2019',
-                                    answer: `
-                                        <ul>
-                                            <li>
-                                                Prata em Evento Promocional<br />
-                                                Case: John Deere e Esfera na M&T Expo 2018
-                                            </li>
-                                        </ul>
-                                    `
-                                },
-                                {
-                                    question: 'Prêmio Caio 2020',
+                                    question: 'Prêmio Caio 2024',
                                     answer: `
                                         <ul>
                                             <li>
                                                 Ouro em Convenção Regional<br />
-                                                Case: Premiação Agrinho 2019 - SENAR-PR
+                                                Case: Encontro Estadual de Líderes Rurais 2023 | Sistema FAEP/SENAR-PR
                                             </li>
                                             <li>
-                                                Prata em Solução Web<br />
-                                                Case: Plataforma Conecta John Deere
+                                                Ouro em Evento Promocional<br />
+                                                Case: John Deere & Wirtgen Group na M&T Expo 2024
+                                            </li>
+                                            <li>
+                                                Bronze em Convenção Internacional<br />
+                                                Case: Dealer Meeting C&F John Deere
+                                            </li>
+                                            <li>
+                                                Bronze em Mostra e Exposição<br />
+                                                Case: John Deere na Expoforest 2023
                                             </li>
                                         </ul>
                                     `
                                 },
                                 {
-                                    question: 'Prêmio Caio 2021',
+                                    question: 'Prêmio Mais Sustentável by M&T Expo',
                                     answer: `
                                         <ul>
                                             <li>
-                                                Ouro em Evento Artístico<br />
-                                                Case: Huawei Music Night 4All
+                                                Vencedores na Categoria C (Estandes acima de 500m²)<br />
+                                                Case: Estande John Deere & Wirtgen Group
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Prêmio Achieving Excellence John Deere',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Partner Level Performance 2024
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Prêmio Caio 2023',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Prata em Soluções Inovadoras e Novas Tecnologias<br />
+                                                Case: Experiência Imersiva Agrishow 2023 | John Deere
                                             </li>
                                             <li>
-                                                Prata em Feira, Exposição, Salão e Mostra B2C<br />
-                                                Case: Expofeira Pelotas 2020 - Associação Rural de Pelotas
+                                                Prata em Convenção Internacional<br />
+                                                Case: Planning Week 2023 | John Deere
+                                            </li>
+                                            <li>
+                                                Prata em Convenção Regional<br />
+                                                Case: Encontro Estadual de Líderes Rurais 2022 | Sistema FAEP/ SENAR-PR
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: '21ª Mostra de Comunicação do Agro - Associação Brasileira de Marketing Rural e Agro (ABMRA)',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Prata em Ações em Feiras, Eventos e Congressos Presenciais<br />
+                                                Case: John Deere na Agrishow 2023
+                                            </li>
+                                            <li>
+                                                Prata em Campanhas de valorização do Agro<br />
+                                                Case: Agro pela Vida | John Deere
+                                            </li>
+                                            <li>
+                                                Bronze em Ações de “Dia de Campo”<br />
+                                                Case: Rally da Cana | John Deere
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Prêmio Achieving Excellence John Deere',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Partner Level Performance 2023
                                             </li>
                                         </ul>
                                     `
@@ -145,26 +174,122 @@ export default function Awards() {
                                             </li>
                                             <li>
                                                 Bronze em Convenção Internacional<br />
-                                                Case: Expo Latin  America 2021 - John Deere
+                                                Case: Expo Latin America 2021 - John Deere
                                             </li>
                                         </ul>
                                     `
                                 },
                                 {
-                                    question: 'Prêmio Caio 2023',
+                                    question: '20ª Mostra de Comunicação do Agro - Associação Brasileira de Marketing Rural e Agro (ABMRA)',
                                     answer: `
                                         <ul>
                                             <li>
-                                                Prata em Soluções Inovadoras e Novas Tecnologias<br />
-                                                Case: Experiência Imersiva Agrishow 2023 - John Deere
+                                                Ouro em Programa e Campanha de Incentivo<br />
+                                                Case: Expo Latin America 2021 - John Deere
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Premiação Encontro com Fornecedores John Deere',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Fornecedor Partner 2022
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Prêmio Achieving Excellence John Deere',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Hall of Fame 2022
                                             </li>
                                             <li>
-                                                Prata em Convenção Internacional<br />
-                                                Case: Planning Week 2023 - John Deere
+                                                Partner Level Performance 2022
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Prêmio Caio 2021',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Ouro em Evento Artístico<br />
+                                                Case: Huawei Music Night 4All
                                             </li>
                                             <li>
-                                                Prata em Convenção Regional<br />
-                                                Case: Encontro Estadual de Líderes Rurais - SENAR-PR
+                                                Prata em Feira, Exposição, Salão e Mostra B2C<br />
+                                                Case: Expofeira Pelotas 2020 - Associação Rural de Pelotas
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Premiação Encontro com Fornecedores John Deere',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Fornecedor Partner 2021
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Prêmio Live',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Ouro em Agência Regional de Brand Experience
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Prêmio Caio 2020',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Ouro em Convenção Regional<br />
+                                                Case: Premiação Agrinho 2019 - SENAR-PR
+                                            </li>
+                                            <li>
+                                                Prata em Solução Web<br />
+                                                Case: Plataforma Conecta John Deere
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Premiação Encontro com Fornecedores John Deere',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Prêmio Colaboração - Excelência em Gestão de Custos 2020
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Prêmio Caio 2019',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Prata em Evento Promocional<br />
+                                                Case: John Deere e Esfera na M&T Expo 2018
+                                            </li>
+                                        </ul>
+                                    `
+                                },
+                                {
+                                    question: 'Premiação Encontro com Fornecedores John Deere',
+                                    answer: `
+                                        <ul>
+                                            <li>
+                                                Fornecedor Partner 2019
                                             </li>
                                         </ul>
                                     `

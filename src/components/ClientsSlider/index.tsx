@@ -21,7 +21,7 @@ export default function ClientsSlider() {
 
                     <TextReveal className='md:text-right mt-6 md:mt-4'>
                         <p className='text-18 md:w-80 lg:mt-5 xl:mt-7 2xl:mt-10'>
-                            Transformamos ideias que ganham forma porque são construídas junto de quem nos inspira<span className='md:hidden'>.</span>
+                            Ideias se tornam soluções quando são construídas ao lado de quem nos inspira<span className='md:hidden'>.</span>
                         </p>
                     </TextReveal>
 

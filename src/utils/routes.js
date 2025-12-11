@@ -32,7 +32,7 @@ export const social = {
 export const contact = {
 	phone: '(41) 3340-4300',
 	email: 'agenciaesfera@agenciaesfera.com.br',
-	address: 'Av. Rep. Argentina, 1228 - Água Verde, Curitiba - PR, 80610-260',
+	address: 'Av. Rep. Argentina, 1228 - Vila Izabel, Curitiba - PR, 80610-260',
 	gmaps: 'https://maps.app.goo.gl/Sg1E92zC1FYNJMYx7'
 }
 

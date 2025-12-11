@@ -189,7 +189,7 @@ export default function Footer() {
 							className='text-18 transition-opacity duration-200 hover:opacity-70'
 						>
 							<b className='font-semibold'>Av. Rep. Argentina, 1228</b> <br />
-							Água Verde, Curitiba - PR, 80610-260
+							Vila Izabel, Curitiba - PR, 80610-260
 						</Link>
 					</MagneticButton>
 

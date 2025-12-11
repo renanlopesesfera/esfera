@@ -65,7 +65,7 @@ export default function Services() {
 
                     <TextReveal>
                         <p className='text-20 text-white'>
-                            Tudo para sua marca ser lembrada
+                            Tudo para sua marca se tornar experiência
                         </p>
                     </TextReveal>
 
@@ -99,11 +99,11 @@ export default function Services() {
                                 { text: 'Eventos Corporativos' },
                                 { text: 'Eventos Presenciais, Híbridos & Online' },
                                 { text: 'Eventos Internacionais' },
-                                { text: 'Operação de Campo' },
+                                { text: 'Operações de Campo' },
                                 { text: 'Live Marketing' },
                                 { text: 'Ativações de Marca' },
                                 { text: 'Relacionamento & Lançamentos' },
-                                { text: 'Congresso & Conveções' },
+                                { text: 'Congressos & Convenções' },
                                 { text: 'Capacitações & Workshops' },
                                 { text: 'Feiras & Stands' },
                                 { text: 'Viagens de Incentivo' },

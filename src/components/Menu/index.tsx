@@ -514,7 +514,7 @@ export default function Menu() {
 								className='block w-fit mt-2 mb-4 text-sm text-gray-dark'
 							>
 								Av. Rep. Argentina, 1228 <br />
-								Água Verde, Curitiba - PR, 80610-260
+								Vila Izabel, Curitiba - PR, 80610-260
 							</Link>
 
 							<ul className='flex items-center gap-2'>

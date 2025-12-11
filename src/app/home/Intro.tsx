@@ -235,7 +235,7 @@ export default function Intro() {
                                 </p>
 
                                 <h2 className='reveal-text font-heading text-100 uppercase tracking-tighter font-semibold mt-2'>
-                                    Impusionar seu <span className='text-yellow'>sucesso</span>
+                                    Impulsionar seu <span className='text-yellow'>sucesso</span>
                                 </h2>
 
                             </SwiperSlide>
@@ -277,7 +277,7 @@ export default function Intro() {
                         <div className='col-lg-5 col-lg-pull-7 lg:py-10'>
                             <TextReveal className='[&_.block-revealer]:h-[115%]!'>
                                 <p className='text-60 text-center lg:text-left'>
-                                    Na <Link href={pages.about} className='relative font-semibold before:content-[""] before:absolute before:bottom-3 before:left-0 before:w-full before:h-1 before:bg-yellow before:scale-x-0 before:origin-left before:transition-transform before:duration-300 before:ease-in-out hover:before:scale-x-100'>Esfera</Link> trabalhamos com energia, paixão e respeito.
+                                    Na <Link href={pages.about} className='relative font-semibold before:content-[""] before:absolute before:bottom-3 before:left-0 before:w-full before:h-1 before:bg-yellow before:scale-x-0 before:origin-left before:transition-transform before:duration-300 before:ease-in-out hover:before:scale-x-100'>Esfera</Link>, trabalhamos com energia, paixão e respeito.
                                 </p>
                             </TextReveal>
                         </div>
