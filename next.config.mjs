@@ -1,10 +1,8 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+	turbopack: {},
 	reactStrictMode: false,
-	eslint: {
-		ignoreDuringBuilds: true
-	},
 	webpack(config) {
 		const fileLoaderRule = config.module.rules.find((rule) =>
 		  	rule.test?.test?.('.svg')
