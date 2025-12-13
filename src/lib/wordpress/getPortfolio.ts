@@ -40,13 +40,13 @@ export type PortfolioItem = {
         thumbnail: PortfolioImage
         bgImage: PortfolioImage
     }
-    portfolioCategories: PortfolioCategory
+    categories: PortfolioCategory
 }
 
 // graphql query
 const query = gql`
     query GetPortfolio($limit: Int!) {
-        allPortfolio(
+        posts(
             first: $limit
             where: {
                 orderby: {
@@ -59,6 +59,12 @@ const query = gql`
                 id
                 title
                 slug
+                date
+                categories {
+                    nodes {
+                        name
+                    }
+                }
                 portfolioFields {
                     area
                     client
@@ -78,12 +84,6 @@ const query = gql`
                         }
                     }
                 }
-                portfolioCategories {
-                    nodes {
-                        name
-                    }
-                }
-                date
             }
         }
     }
@@ -92,5 +92,5 @@ const query = gql`
 // featch function
 export async function getPortfolioList(limit: number = 999): Promise<PortfolioItem[]> {
     const data = await client.request(query, { limit })
-    return data.allPortfolio.nodes
+    return data.posts.nodes
 }

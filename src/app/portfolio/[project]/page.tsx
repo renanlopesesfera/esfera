@@ -34,15 +34,25 @@ export default async function Project({
     const allProjects = await getPortfolioList()
     const index = allProjects.findIndex(p => p.slug === slug)
     const next = index === -1 ? null : allProjects[(index + 1) % allProjects.length]
-    
-    console.log(project)
 
     function isMultiText(block: any) {
-        return block.fieldGroupName === 'PortfolioFieldsMainContentMultitextLayout'
+        return block.fieldGroupName === 'PortfolioFieldsMainContentMultiTextLayout'
     }
     
     function isFullscreenMedia(block: any) {
-        return block.fieldGroupName === 'PortfolioFieldsMainContentFsmediaLayout' && (block.fsmedia_image?.node?.mediaItemUrl || block.fsmedia_video?.node?.mediaItemUrl)
+        return block.fieldGroupName === 'PortfolioFieldsMainContentFsMediaLayout' && (block.fs_media_image?.node?.mediaItemUrl || block.fs_media_video?.node?.mediaItemUrl)
+    }
+
+    function isBigMedia(block: any) {
+        return block.fieldGroupName === 'PortfolioFieldsMainContentBigMediaLayout' && (block.big_media_image?.node?.mediaItemUrl || block.big_media_video?.node?.mediaItemUrl)
+    }
+
+    function isDoubleSlider(block: any) {
+        return block.fieldGroupName === 'PortfolioFieldsMainContentDoubleSliderLayout' && (block.double_slider_top?.length > 0 || block.double_slider_bottom?.length > 0)
+    }
+
+    function isExpandingGrid(block: any) {
+        return block.fieldGroupName === 'PortfolioFieldsMainContentExpandingGridLayout' && (block.expanding_grid_media?.length > 0)
     }
 
     return (
@@ -50,7 +60,7 @@ export default async function Project({
 
             <Banner
                 image={project.portfolioFields.bgImage.node.mediaItemUrl}
-                category={project.portfolioCategories.nodes[0]?.name}
+                category={project.categories.nodes[0]?.name}
                 title={project.title}
                 subtitle={project.portfolioFields.subtitle}
                 text={project.portfolioFields.excerpt}
@@ -65,11 +75,11 @@ export default async function Project({
                         return (
                             <MultiText
                                 key={i}
-                                title={block.multitext_title}
-                                subTitle={block.multitext_subtitle}
+                                title={block.multi_text_title}
+                                subTitle={block.multi_text_subtitle}
                             >
-                                {block.multitext_content && (
-                                    <div dangerouslySetInnerHTML={{ __html: block.multitext_content }} />
+                                {block.multi_text_content && (
+                                    <div dangerouslySetInnerHTML={{ __html: block.multi_text_content }} />
                                 )}
                             </MultiText>
                         )
@@ -79,9 +89,57 @@ export default async function Project({
                         return (
                             <FullscreenMedia
                                 key={i}
-                                image={block.fsmedia_image?.node?.mediaItemUrl ?? undefined}
-                                video={block.fsmedia_video?.node?.mediaItemUrl ?? undefined}
-                                alt={block.fsmedia_alt || ''}
+                                image={block.fs_media_image?.node?.mediaItemUrl ?? undefined}
+                                video={block.fs_media_video?.node?.mediaItemUrl ?? undefined}
+                                alt={block.fs_media_alt || ''}
+                            />
+                        )
+                    }
+
+                    if (isBigMedia(block)) {
+                        return (
+                            <BigMedia
+                                key={i}
+                                image={block.big_media_image?.node?.mediaItemUrl ?? undefined}
+                                video={block.big_media_video?.node?.mediaItemUrl ?? undefined}
+                                alt={block.big_media_alt || ''}
+                            />
+                        )
+                    }
+
+                    if (isDoubleSlider(block)) {
+                        const top = block.doubleslider_top?.map((item: any) => ({
+                            image: item.image?.node?.mediaItemUrl,
+                            video: item.video?.node?.mediaItemUrl,
+                            alt: item.alt || ''
+                        })) || []
+
+                        const bottom = block.doubleslider_bottom?.map((item: any) => ({
+                            image: item.image?.node?.mediaItemUrl,
+                            video: item.video?.node?.mediaItemUrl,
+                            alt: item.alt || ''
+                        })) || []
+
+                        return (
+                            <DoubleSlider
+                                key={i}
+                                top={top}
+                                bottom={bottom}
+                            />
+                        )
+                    }
+
+                    if (isExpandingGrid(block)) {
+                        const media = block.expanding_grid_media?.map((item: any) => ({
+                            image: item.image?.node?.mediaItemUrl,
+                            video: item.video?.node?.mediaItemUrl,
+                            alt: item.alt || ''
+                        })) || []
+
+                        return (
+                            <ExpandingGrid
+                                key={i}
+                                media={media}
                             />
                         )
                     }

@@ -25,7 +25,7 @@ export default async function Portfolio() {
 		date: item.date,
 		title: item.title,
 		text: item.portfolioFields.client,
-		category: item.portfolioCategories.nodes[0].name
+		category: item.categories.nodes[0].name
     }))
 
 	return (

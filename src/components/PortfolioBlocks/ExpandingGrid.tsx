@@ -114,7 +114,7 @@ export default function ExpandingGrid({
                         i === 0 && 'main-element top-1/2 left-1/2 w-[26.25vw] h-[25svh] -translate-x-1/2 -translate-y-1/2',
                         i === 1 && 'element-01 top-[10vh] lg:top-[5vh] left-[36.80556vw] w-[35vw] lg:w-[31.25vw] h-[26.5svh] lg:h-[30svh]',
                         i === 2 && 'element-02 top-[32.5svh] lg:top-[22.5svh] left-[3vw] lg:left-[15.97222vw] w-[32vw] lg:w-[19.16667vw] h-[30svh] lg:h-[40svh]',
-                        i === 3 && 'element-03 top-[37.5svh] lg:top-1/2 left-[64.93056vw] w-[26.25vw] h-[20svh] lg:h-[25svh]',
+                        i === 3 && 'element-03 top-[37.5svh] lg:top-1/2 left-[64.93056vw] w-[26.25vw] h-[20svh] lg:h-[25svh] lg:-translate-y-1/2',
                         i === 4 && 'element-04 top-[63.25svh] lg:top-[65svh] left-[10.06944vw] w-[31.25vw] h-[15svh] lg:h-[30svh]',
                         i === 5 && 'element-05 top-[63.25svh] lg:top-[65svh] left-[43.05556vw] w-[20.13889vw] h-[25svh] lg:h-[30svh]',
                         i === 6 && 'element-06 top-[58.25svh] lg:top-[65svh] left-[64.93056vw] w-[19.16667vw] h-[20vw] lg:h-[12.84722vw]',
@@ -160,7 +160,7 @@ export const Block = ({
                         alt={alt || ''}
                         fill
                         className='cover'
-                        sizes='30vw'
+                        sizes='100vw'
                     />
                 )}
 
