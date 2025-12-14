@@ -142,7 +142,6 @@ export default function Contact() {
 										id='newsletter'
 										name='Newsletter'
 										checked
-										required
 										type='checkbox'
 										label='Concordo em receber comunicações de acordo com meus interesses.'
 										className='mb-0!'
