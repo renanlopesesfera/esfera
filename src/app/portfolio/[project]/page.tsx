@@ -10,6 +10,7 @@ import DoubleSlider from '@/components/PortfolioBlocks/DoubleSlider'
 import ExpandingGrid from '@/components/PortfolioBlocks/ExpandingGrid'
 import TwoMedia from '@/components/PortfolioBlocks/TwoMedia'
 import StoriesSlider from '@/components/PortfolioBlocks/StoriesSlider'
+import BigMediaSlider from '@/components/PortfolioBlocks/BigMediaSlider'
 import NextProject from '@/components/PortfolioBlocks/NextProject'
 
 // libs
@@ -53,6 +54,18 @@ export default async function Project({
 
     function isExpandingGrid(block: any) {
         return block.fieldGroupName === 'PortfolioFieldsMainContentExpandingGridLayout' && (block.expanding_grid_media?.length > 0)
+    }
+
+    function isTwoMedia(block: any) {
+        return block.fieldGroupName === 'PortfolioFieldsMainContentTwoMediaLayout' && (block.two_media?.length > 0)
+    }
+
+    function isStoriesSlider(block: any) {
+        return block.fieldGroupName === 'PortfolioFieldsMainContentStoriesSliderLayout' && (block.stories_slider_media?.length > 0)
+    }
+
+    function isBigMediaSlider(block: any) {
+        return block.fieldGroupName === 'PortfolioFieldsMainContentBigMediaSliderLayout' && (block.big_media_slider_media?.length > 0)
     }
 
     return (
@@ -138,6 +151,51 @@ export default async function Project({
 
                         return (
                             <ExpandingGrid
+                                key={i}
+                                media={media}
+                            />
+                        )
+                    }
+
+                    if (isTwoMedia(block)) {
+                        const media = block.two_media?.map((item: any) => ({
+                            image: item.image?.node?.mediaItemUrl,
+                            video: item.video?.node?.mediaItemUrl,
+                            alt: item.alt || ''
+                        })) || []
+                        
+                        return (
+                            <TwoMedia
+                                key={i}
+                                media={media}
+                            />
+                        )
+                    }
+
+                    if (isStoriesSlider(block)) {
+                        const media = block.stories_slider_media?.map((item: any) => ({
+                            image: item.image?.node?.mediaItemUrl,
+                            video: item.video?.node?.mediaItemUrl,
+                            alt: item.alt || ''
+                        })) || []
+
+                        return (
+                            <StoriesSlider
+                                key={i}
+                                media={media}
+                            />
+                        )
+                    }
+
+                    if (isBigMediaSlider(block)) {
+                        const media = block.big_media_slider_media?.map((item: any) => ({
+                            image: item.image?.node?.mediaItemUrl,
+                            video: item.video?.node?.mediaItemUrl,
+                            alt: item.alt || ''
+                        })) || []
+
+                        return (
+                            <BigMediaSlider
                                 key={i}
                                 media={media}
                             />

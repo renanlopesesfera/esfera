@@ -66,26 +66,28 @@ export default function Section({
 
                     </div>
 
-                    <div className='flex items-center gap-4 text-white text-20'>
+                    {categories.length >= 2 && (
+                        <div className='flex items-center gap-4 text-white text-20'>
 
-                        <button
-                            onClick={() => setSelectedCategory(null)}
-                            className={`hover-underline ${!selectedCategory ? 'text-yellow' : ''}`}
-                        >
-                            Tudo
-                        </button>
-
-                        {categories.map((category) => (
                             <button
-                                key={category}
-                                onClick={() => setSelectedCategory(category)}
-                                className={`hover-underline ${selectedCategory === category ? 'text-yellow' : ''}`}
+                                onClick={() => setSelectedCategory(null)}
+                                className={`hover-underline ${!selectedCategory ? 'text-yellow' : ''}`}
                             >
-                                {category}
+                                Tudo
                             </button>
-                        ))}
 
-                    </div>
+                            {categories.map((category) => (
+                                <button
+                                    key={category}
+                                    onClick={() => setSelectedCategory(category)}
+                                    className={`hover-underline ${selectedCategory === category ? 'text-yellow' : ''}`}
+                                >
+                                    {category}
+                                </button>
+                            ))}
+
+                        </div>
+                    )}
 
                 </div>
 

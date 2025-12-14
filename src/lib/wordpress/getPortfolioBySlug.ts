@@ -258,6 +258,63 @@ const query = gql`
                                 }
                             }
                         }
+                        ... on PortfolioFieldsMainContentTwoMediaLayout {
+                            fieldGroupName
+                            two_media {
+                                fieldGroupName
+                                alt
+                                image {
+                                    node {
+                                        mediaItemUrl
+                                        sizes
+                                        srcSet
+                                    }
+                                }
+                                video {
+                                    node {
+                                        mediaItemUrl
+                                    }
+                                }
+                            }
+                        }
+                        ... on PortfolioFieldsMainContentStoriesSliderLayout {
+                            fieldGroupName
+                            stories_slider_media {
+                                fieldGroupName
+                                alt
+                                image {
+                                    node {
+                                        mediaItemUrl
+                                        sizes
+                                        srcSet
+                                    }
+                                }
+                                video {
+                                    node {
+                                        mediaItemUrl
+                                    }
+                                }
+                            }
+                        }
+                        ... on PortfolioFieldsMainContentBigMediaSliderLayout {
+                            fieldGroupName
+                            big_media_slider_media {
+                                fieldGroupName
+                                alt
+                                image {
+                                    node {
+                                        mediaItemUrl
+                                        sizes
+                                        srcSet
+                                    }
+                                }
+                                video {
+                                    node {
+                                        mediaItemUrl
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
