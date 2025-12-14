@@ -20,7 +20,7 @@ interface Props {
     children: React.ReactNode
 }
 
-export default function Banner({
+export default function BannerInternal({
     image,
     subtitle,
     title,

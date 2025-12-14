@@ -19,33 +19,32 @@ Site institucional desenvolvido para a Agência Esfera, uma agência especializa
 ## 🛠️ Stack Tecnológica
 
 ### Core
-- **Next.js 15.5.9** - Framework React com App Router
-- **React 18.3.1** - Biblioteca UI
-- **TypeScript 5** - Tipagem estática
-- **Tailwind CSS 4.1.17** - Framework CSS utility-first
-- **PostCSS 8.5.6** - Processamento de CSS
+- **Next.js** - Framework React com App Router
+- **React** - Biblioteca UI
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS** - Framework CSS utility-first
+- **PostCSS** - Processamento de CSS
 
 ### Animações
-- **GSAP 3.13.0** - Biblioteca de animações
-- **Motion 12.23.26** - Animações declarativas
-- **@gsap/react 2.1.1** - Hooks React para GSAP
+- **GSAP** - Biblioteca de animações
+- **Motion** - Animações declarativas
+- **@gsap/react** - Hooks React para GSAP
 
 ### Integrações
 - **WordPress GraphQL** - CMS headless via `graphql-request`
-- **SendGrid 8.1.6** - Serviço de email transacional
+- **Resend** - Serviço de email transacional
 - **Google Analytics** - Analytics via `@next/third-parties`
 
 ### Componentes e Bibliotecas
-- **Fancybox 5.0.36** - Galeria de mídia
-- **Swiper 11.2.1** - Sliders e carrosséis
-- **React Hook Form 7.54.2** - Gerenciamento de formulários
-- **next-transition-router 0.2.11** - Transições de página
+- **Swiper** - Sliders e carrosséis
+- **React Hook Form** - Gerenciamento de formulários
+- **next-transition-router** - Transições de página
 
 ### Ferramentas de Desenvolvimento
 - **ESLint** - Linter de código
 - **Sass** - Pré-processador CSS
 - **@svgr/webpack** - Importação de SVGs como componentes React
-- **next-sitemap 4.2.3** - Geração automática de sitemap
+- **next-sitemap** - Geração automática de sitemap
 
 ## 📦 Instalação
 
@@ -85,24 +84,25 @@ O script `postbuild` é executado automaticamente após o build para gerar o sit
 ```
 esfera/
 ├── src/
-│   ├── app/                    # App Router do Next.js
-│   │   ├── home/              # Página inicial
-│   │   ├── sobre/             # Página sobre
-│   │   ├── contato/           # Página de contato
-│   │   ├── portfolio/         # Páginas de portfolio
-│   │   └── api/               # API routes
-│   ├── components/            # Componentes React
-│   │   ├── Utils/             # Utilitários e animações
-│   │   └── PortfolioBlocks/   # Componentes de portfolio
-│   ├── lib/                   # Bibliotecas e helpers
-│   │   └── wordpress/         # Integração WordPress
-│   ├── assets/                # Assets estáticos
-│   │   ├── css/               # Estilos globais
-│   │   └── svg/               # Ícones SVG
-│   └── utils/                 # Funções utilitárias
-├── public/                    # Arquivos públicos
-│   ├── img/                   # Imagens
-│   └── videos/                # Vídeos
+│   ├── app/                                    # App Router do Next.js
+│   │   ├── home/                               # Página inicial
+│   │   ├── sobre/                              # Página sobre
+│   │   ├── contato/                            # Página de contato
+│   │   ├── portfolio/                          # Páginas de portfolio
+│   │   ├── politica-de-privacidade/            # Páginas de política de privacidade
+│   │   └── api/                                # API routes
+│   ├── components/                             # Componentes React
+│   │   ├── Utils/                              # Utilitários e animações
+│   │   └── PortfolioBlocks/                    # Componentes de portfolio
+│   ├── lib/                                    # Bibliotecas e helpers
+│   │   └── wordpress/                          # Integração WordPress
+│   ├── assets/                                 # Assets estáticos
+│   │   ├── css/                                # Estilos globais
+│   │   └── svg/                                # Ícones SVG
+│   └── utils/                                  # Funções utilitárias
+├── public/                                     # Arquivos públicos
+│   ├── img/                                    # Imagens
+│   └── videos/                                 # Vídeos
 └── package.json
 ```
 
@@ -113,7 +113,7 @@ esfera/
 Crie um arquivo `.env.local` na raiz do projeto com as seguintes variáveis:
 
 - `WP_GRAPHQL` - URL do endpoint GraphQL do WordPress
-- `SENDGRID_API_KEY` - Chave da API do SendGrid (para formulário de contato)
+- `RESEND_API_KEY` - Chave da API do Resend (para formulário de contato)
 
 ### WordPress
 

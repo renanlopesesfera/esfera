@@ -83,13 +83,13 @@ export default function Contact() {
 
 						<div className='col-lg-6'>
 							<Form
-								endpoint='/api/contact'
+								endpoint='/api/resend'
 								onSuccess={{
-									title: 'Mensagem enviada com sucesso!',
+									title: 'Mensagem enviada com sucesso',
 									text: 'Obrigado por entrar em contato. Entraremos em contato o mais breve possível.'
 								}}
 								onError={{
-									title: 'Ocorreu um erro ao enviar a mensagem.',
+									title: 'Ocorreu um erro ao enviar a mensagem',
 									text: 'Por favor, tente novamente mais tarde.'
 								}}
 								clearOnSubmit

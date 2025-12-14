@@ -6,7 +6,8 @@ import { useRef, useState } from 'react'
 import { FormProvider, type RegisterOptions, type SubmitHandler, useForm, useFormContext } from 'react-hook-form'
 
 // components
-import Fancybox from '@/components/Utils/Fancybox'
+import Portal from '@/components/Utils/Portal'
+import Dialog from '@/components/Dialog'
 
 // svg
 import UxCheck from '@/assets/svg/ux/check.svg'
@@ -16,34 +17,21 @@ import UxSpinner from '@/assets/svg/ux/spinner.svg'
 
 interface ModalProps {
 	id: string
-	popup: React.RefObject<HTMLAnchorElement>
 	title: string
 	text: string
-	onClick: () => void
+	onClose: () => void
 }
 
 export const Modal = ({
-	popup,
 	id,
 	title,
 	text,
-	onClick
+	onClose
 }: ModalProps) => {
 	return (
-		<Fancybox>
-			<a
-				ref={popup}
-				href={`#${id}`}
-				data-fancybox
-				className='absolute invisible'
-				aria-hidden
-			/>
-
-			<div
-				id={id}
-				className='hidden text-center w-160 max-w-[calc(100%-2rem)]! rounded-lg!'
-			>
-				<div className='py-4'>
+		<Portal>
+			<Dialog id={id}>
+				<div className='text-center'>
 
 					<h2 className='font-heading text-60 uppercase font-semibold tracking-tight'>
 						{title}
@@ -56,16 +44,16 @@ export const Modal = ({
 
 					<button
 						className='button button--yellow mx-auto'
-						data-fancybox-close
-						onClick={onClick}
+						data-dialog-close
+						onClick={onClose}
 						type='button'
 					>
 						Fechar
 					</button>
 
 				</div>
-			</div>
-		</Fancybox>
+			</Dialog>
+		</Portal>
 	)
 }
 
@@ -101,10 +89,8 @@ export const Form = ({
 
 	// refs
 	const form = useRef<HTMLFormElement>(null)
-	const popupSuccess = useRef<HTMLAnchorElement>(null)
-	const popupError = useRef<HTMLAnchorElement>(null)
 
-	// useState to make the Modals invisible
+	// useState to make the Modals visible
 	const [renderSuccessModal, setRenderSuccessModal] = useState(false)
 	const [renderErrorModal, setRenderErrorModal] = useState(false)
 
@@ -177,7 +163,10 @@ export const Form = ({
 					setRenderSuccessModal(true)
 
 					setTimeout(() => {
-						popupSuccess?.current?.click()
+						const dialog = document.getElementById('success') as HTMLDialogElement
+						if (dialog) {
+							dialog.showModal()
+						}
 
 						if (form.current) {
 							form.current.setAttribute('data-is-sending', 'false')
@@ -202,7 +191,10 @@ export const Form = ({
 					setRenderErrorModal(true)
 
 					setTimeout(() => {
-						popupError?.current?.click()
+						const dialog = document.getElementById('error') as HTMLDialogElement
+						if (dialog) {
+							dialog.showModal()
+						}
 
 						if (form.current) {
 							form.current.setAttribute('data-is-sending', 'false')
@@ -227,23 +219,53 @@ export const Form = ({
 				{children}
 			</form>
 
+			{/*
+			<button
+				type='button'
+				onClick={() => {
+					setRenderSuccessModal(true)
+					setTimeout(() => {
+						const dialog = document.getElementById('success') as HTMLDialogElement
+						if (dialog) {
+							dialog.showModal()
+						}
+					}, 100)
+				}}
+			>
+				test Success Modal
+			</button>
+
+			<button
+				type='button'
+				onClick={() => {
+					setRenderErrorModal(true)
+					setTimeout(() => {
+						const dialog = document.getElementById('error') as HTMLDialogElement
+						if (dialog) {
+							dialog.showModal()
+						}
+					}, 100)
+				}}
+			>
+				test Error Modal
+			</button>
+			*/}
+
 			{renderSuccessModal && (
 				<Modal
 					id='success'
-					popup={popupSuccess}
 					title={onSuccess.title}
 					text={onSuccess.text}
-					onClick={closeSuccessModal}
+					onClose={closeSuccessModal}
 				/>
 			)}
 
 			{renderErrorModal && (
 				<Modal
 					id='error'
-					popup={popupError}
 					title={onError.title}
 					text={onError.text}
-					onClick={closeErrorModal}
+					onClose={closeErrorModal}
 				/>
 			)}
 

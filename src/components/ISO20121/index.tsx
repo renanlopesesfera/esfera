@@ -5,7 +5,7 @@ import Image from 'next/image'
 import MagneticButton from '@/components/Utils/Animations/MagneticButton'
 import AnimatedText from '@/components/Utils/Animations/AnimatedText'
 
-export default function Social() {
+export default function ISO20121() {
     return (
         <section className='bg-black pb-15 sm:pb-20 md:pb-25 xl:pb-30'>
             <div className='base-container'>

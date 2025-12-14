@@ -2,16 +2,16 @@
 import Image from 'next/image'
 
 // components
-import Banner from './Banner'
+import BannerInternal from '@/components/BannerInternal'
 import MultiText from '@/components/PortfolioBlocks/MultiText'
 import Services from './Services'
-import BigNumbers from '@/components/BigNumbers'
-import AnimatedText from '@/components/Utils/Animations/AnimatedText'
 import Testimonials from './Testimonials'
 import Awards from './Awards'
-import Social from './Social'
+import BigNumbers from '@/components/BigNumbers'
+import AnimatedText from '@/components/Utils/Animations/AnimatedText'
 import Video from '@/components/Video'
 import StaggerScale from '@/components/Utils/Animations/StaggerScale'
+import ISO20121 from '@/components/ISO20121'
 
 // utils
 import { logos } from '@/utils/logos'
@@ -26,7 +26,7 @@ export default function About() {
     return (
         <main>
 
-            <Banner
+            <BannerInternal
                 image='/img/team.jpg'
                 subtitle='Sobre'
                 title='Somos uma agência de eventos corporativos'
@@ -34,7 +34,7 @@ export default function About() {
                 <p className='text-20 leading-loose! text-white'>
                     Trabalhamos com <b>energia, paixão e respeito,</b> e acreditamos que transparência e confiança são a base para construir boas parcerias.
                 </p>
-            </Banner>
+            </BannerInternal>
 
             <MultiText
                 title='Nossos eventos conectam pessoas, idéias e marcas'
@@ -128,7 +128,7 @@ export default function About() {
                 text='E somamos mais alguns números também...'
             />
 
-            <section className='pt-15 sm:pt-20 md:pt-25 xl:pt-30'>
+            <section className='py-15 sm:py-20 md:py-25 xl:py-30'>
                 <div className='base-container'>
                     
                     <h2 className='font-heading uppercase text-100 font-semibold tracking-tighter block mb-6 md:mb-10'>
@@ -158,11 +158,13 @@ export default function About() {
                 </div>
             </section>
 
+            {/*
             <Testimonials />
+            */}
 
             <Awards />
 
-            <Social />
+            <ISO20121 />
 
         </main>
     )

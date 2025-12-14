@@ -51,13 +51,13 @@ export default function Footer() {
 			className='pb-8 sm:pb-10 pt-14 sm:pt-17 bg-white'
 			data-main-footer
 		>
-			<div className='base-container'>
+			<div className='base-container relative'>
 
-				<div className='flex flex-col xl:flex-row xl:items-center xl:justify-between gap-2'>
+				<div className='flex flex-col md:flex-row md:items-center md:justify-between gap-2'>
 
-					<ul className='flex flex-col xs:flex-row xs:flex-wrap sm:flex-nowrap xs:items-center xs:gap-5 sm:gap-6'>
+					<ul className='flex flex-col xs:flex-row xs:flex-wrap sm:flex-nowrap xs:gap-5 sm:gap-6'>
 
-						<li className='w-full sm:w-fit xl:hidden mb-4 xs:mb-0'>
+						<li className='w-full sm:w-fit mb-4 xs:mb-0'>
 							<MagneticButton>
 								<Link
 									href={pages.home}
@@ -109,7 +109,71 @@ export default function Footer() {
 
 					</ul>
 
-					<div className='xl:flex xl:items-center xl:gap-6 mt-6 xl:mt-0'>
+					<div className='bottom-0 right-0 absolute lg:bottom-auto lg:right-auto lg:relative'>
+						<MagneticButton>
+							<Link
+								href='https://greencarbonzero.com/'
+								target='_blank'
+								rel='noopener noreferrer'
+								className='flex w-16 h-auto transition-all duration-200 md:grayscale-100 hover:md:grayscale-0 md:opacity-70 hover:md:opacity-100'
+							>
+								<Image
+									src='/img/svg/green-carbon.svg'
+									alt='Green Carbon by NDD'
+									width={340}
+									height={460}
+									loading='lazy'
+									className='w-full h-auto'
+								/>
+							</Link>
+						</MagneticButton>
+					</div>
+
+				</div>
+
+				<div className='flex flex-col-reverse lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8 lg:gap-4 mt-10 lg:mt-20'>
+
+					<div className='flex flex-col gap-8'>
+
+						<div className='flex flex-col sm:flex-row sm:items-center gap-5 lg:gap-7'>
+
+							<ul className='flex gap-2 lg:gap-3'>
+								{socialLinks.map((item, i) => (
+									<li key={i}>
+										<MagneticButton>
+											<Link
+												href={item.href}
+												target='_blank'
+												rel='noopener noreferrer'
+												className='flex items-center justify-center w-12 lg:w-15 min-w-12 lg:min-w-15 h-12 lg:h-15 border border-gray-light text-gray-light rounded-full transition-colors duration-200 hover:text-white hover:bg-gray-medium hover:border-gray-medium p-4 lg:p-5'
+												aria-label={item.name}
+											>
+												<item.icon className='w-full h-full' />
+											</Link>
+										</MagneticButton>
+									</li>
+								))}
+							</ul>
+
+							<p className='text-gray-light'>
+								Agência Esfera © {year} <br />
+								Todos os direitos reservados
+							</p>
+
+						</div>
+
+						<MagneticButton>
+							<Link
+								href={pages.privacy}
+								className='hover-underline text-gray-light'
+							>
+								Política de Privacidade
+							</Link>
+						</MagneticButton>
+
+					</div>
+
+					<div className='flex flex-col lg:items-end lg:text-right'>
 
 						<MagneticButton>
 							<Link
@@ -119,79 +183,29 @@ export default function Footer() {
 								{contact.email}
 							</Link>
 						</MagneticButton>
+						
+						<MagneticButton className='mt-8 mb-4'>
+							<Link
+								href={phone(contact.phone)}
+								className='hover-underline text-gray-light text-20'
+							>
+								{contact.phone}
+							</Link>
+						</MagneticButton>
 
 						<MagneticButton>
 							<Link
-								href={pages.home}
-								className='w-14 min-w-14 h-14 hidden xl:flex transition-opacity duration-200 hover:opacity-70'
-								onClick={(e) => handleLinkClick(e, pages.home)}
+								href={contact.gmaps}
+								target='_blank'
+								rel='noopener noreferrer'
+								className='text-18 transition-opacity duration-200 hover:opacity-70'
 							>
-								<Image
-									src='/img/svg/logo/icon-black.svg'
-									alt='Esfera'
-									width={65}
-									height={65}
-									loading='lazy'
-									className='w-full h-full'
-								/>
+								<b className='font-semibold'>Av. Rep. Argentina, 1228</b> <br />
+								Vila Izabel, Curitiba - PR, 80610-260
 							</Link>
 						</MagneticButton>
 
 					</div>
-
-				</div>
-
-				<div className='flex xl:justify-end mt-10 xl:mt-19 mb-8 xl:mb-12'>
-					<MagneticButton>
-						<Link
-							href={phone(contact.phone)}
-							className='hover-underline text-gray-light text-20'
-						>
-							{contact.phone}
-						</Link>
-					</MagneticButton>
-				</div>
-
-				<div className='flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between gap-6 sm:gap-8 lg:gap-4'>
-
-					<div className='flex flex-col sm:flex-row sm:items-center gap-5 lg:gap-7'>
-
-						<ul className='flex gap-2 lg:gap-3'>
-							{socialLinks.map((item, i) => (
-								<li key={i}>
-									<MagneticButton>
-										<Link
-											href={item.href}
-											target='_blank'
-											rel='noopener noreferrer'
-											className='flex items-center justify-center w-12 lg:w-15 min-w-12 lg:min-w-15 h-12 lg:h-15 border border-gray-light text-gray-light rounded-full transition-colors duration-200 hover:text-white hover:bg-gray-medium hover:border-gray-medium p-4 lg:p-5'
-											aria-label={item.name}
-										>
-											<item.icon className='w-full h-full' />
-										</Link>
-									</MagneticButton>
-								</li>
-							))}
-						</ul>
-
-						<p className='text-gray-light'>
-							Agência Esfera © {year} <br />
-							Todos os direitos reservados
-						</p>
-
-					</div>
-
-					<MagneticButton className='lg:text-right'>
-						<Link
-							href={contact.gmaps}
-							target='_blank'
-							rel='noopener noreferrer'
-							className='text-18 transition-opacity duration-200 hover:opacity-70'
-						>
-							<b className='font-semibold'>Av. Rep. Argentina, 1228</b> <br />
-							Vila Izabel, Curitiba - PR, 80610-260
-						</Link>
-					</MagneticButton>
 
 				</div>
 
