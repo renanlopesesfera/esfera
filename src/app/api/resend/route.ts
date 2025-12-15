@@ -7,7 +7,7 @@ if (!process.env.RESEND_API_KEY) {
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 const getDestinationEmail = (): string => {
-	return 'flavioczuk@gmail.com'
+	return 'administrativo@agenciaesfera.com.br'
 }
 
 const IGNORED_FIELDS = ['form', 'company'] // company = honeypot
@@ -87,8 +87,8 @@ export async function POST(req: Request) {
 			.join('\n')
 
 		const { error } = await resend.emails.send({
-			//from: 'Agência Esfera <agenciaesfera@agenciaesfera.com.br>',
-			from: 'onboarding@resend.dev',
+			from: 'Agência Esfera <administrativo@agenciaesfera.com.br>',
+			//from: 'onboarding@resend.dev',
 			to: [destinationEmail],
 			replyTo: body.Email,
 			subject: 'Mensagem enviada de Formulário de Contato',

@@ -168,7 +168,7 @@ export default function Intro() {
                         id='video-step-1'
                     >
                         <source
-                            src='/videos/intro.mp4'
+                            src='/videos/intro-03.mp4'
                             type='video/mp4'
                         />
                     </video>
