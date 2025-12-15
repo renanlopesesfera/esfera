@@ -57,7 +57,7 @@ export default function MultiText({
                                 'col-lg-6',
                                 !subTitle && 'offset-lg-4'
                             )}>
-                                <div className='rich-text'>
+                                <div className='rich-text [&>div]:flex [&>div]:flex-col [&>div]:gap-6'>
                                     {children}
                                 </div>
                             </div>
