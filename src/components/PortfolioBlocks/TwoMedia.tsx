@@ -47,7 +47,7 @@ export const Media = ({
 }: MediaProps) => {
     return (
         <div className='col-12 col-lg-6'>
-            <div className='relative overflow-hidden block w-full aspect-4/3 rounded-md'>
+            <div className='relative overflow-hidden block w-full aspect-4/3 rounded-md bg-black'>
 
                 {image && (
                     <Image

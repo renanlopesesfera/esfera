@@ -108,7 +108,7 @@ export const Media = ({
     alt
 }: MediaProps) => {
     return (
-        <div className='relative overflow-hidden block w-[calc(100vw/1.2)] sm:w-[calc(100vw/1.5)] md:w-[calc(100vw/2.5)] lg:w-[calc(100vw/3.5)] h-auto aspect-9/14 rounded-md'>
+        <div className='relative overflow-hidden block w-[calc(100vw/1.2)] sm:w-[calc(100vw/1.5)] md:w-[calc(100vw/2.5)] lg:w-[calc(100vw/3.5)] h-auto aspect-9/14 rounded-md bg-black'>
 
             {image && (
                 <Image

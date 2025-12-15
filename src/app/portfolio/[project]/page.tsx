@@ -121,17 +121,21 @@ export default async function Project({
                     }
 
                     if (isDoubleSlider(block)) {
-                        const top = block.doubleslider_top?.map((item: any) => ({
-                            image: item.image?.node?.mediaItemUrl,
-                            video: item.video?.node?.mediaItemUrl,
-                            alt: item.alt || ''
-                        })) || []
+                        const top = (block.double_slider_top || [])
+                            .filter((item: any) => item && (item.image?.node?.mediaItemUrl || item.video?.node?.mediaItemUrl))
+                            .map((item: any) => ({
+                                image: item.image?.node?.mediaItemUrl,
+                                video: item.video?.node?.mediaItemUrl,
+                                alt: item.alt || ''
+                            }))
 
-                        const bottom = block.doubleslider_bottom?.map((item: any) => ({
-                            image: item.image?.node?.mediaItemUrl,
-                            video: item.video?.node?.mediaItemUrl,
-                            alt: item.alt || ''
-                        })) || []
+                        const bottom = (block.double_slider_bottom || [])
+                            .filter((item: any) => item && (item.image?.node?.mediaItemUrl || item.video?.node?.mediaItemUrl))
+                            .map((item: any) => ({
+                                image: item.image?.node?.mediaItemUrl,
+                                video: item.video?.node?.mediaItemUrl,
+                                alt: item.alt || ''
+                            }))
 
                         return (
                             <DoubleSlider

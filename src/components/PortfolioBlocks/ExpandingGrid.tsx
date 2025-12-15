@@ -150,7 +150,7 @@ export const Block = ({
             data-position={order}
         >
             <div className={clsx(
-                'absolute overflow-hidden rounded-xs',
+                'absolute overflow-hidden rounded-xs bg-black',
                 className
             )}>
 

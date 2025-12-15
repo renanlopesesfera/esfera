@@ -20,7 +20,7 @@ export default function BigMedia({
     return (
         <Section>
             <div className='base-container'>
-                <div className='relative overflow-hidden block w-full aspect-4/3 md:aspect-video rounded-md md:rounded-lg lg:rounded-xl'>
+                <div className='relative bg-black overflow-hidden block w-full aspect-4/3 md:aspect-video rounded-md md:rounded-lg lg:rounded-xl'>
 
                     {image && (
                         <Image
