@@ -37,9 +37,11 @@ export default function PortfolioBlock({
                 loading='lazy'
             />
 
+            {/*
             <span className='absolute z-2 top-5 right-5 border border-white px-3 py-1 text-xs text-white rounded-4xl'>
                 {category}
             </span>
+            */}
 
 			<span className='flex flex-col relative z-2 text-white'>
 
