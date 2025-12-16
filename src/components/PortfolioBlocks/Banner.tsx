@@ -81,7 +81,7 @@ export default function Banner({
 
             <div className='base-container relative z-2'>
 
-                <div className='flex flex-col gap-4 lg:gap-5 justify-end pb-[6svh] min-h-vh min-h-svh relative lg:pr-50 pt-40'>
+                <div className='flex flex-col gap-4 md:gap-6 lg:gap-8 justify-end pb-[6svh] min-h-vh min-h-svh relative lg:pr-50 pt-40'>
 
                     <p className='text-sm border border-white rounded-4xl px-4 py-1 text-white lg:absolute lg:bottom-[6svh] lg:right-0 w-fit -mb-2 lg:mb-0'>
                         {category}
