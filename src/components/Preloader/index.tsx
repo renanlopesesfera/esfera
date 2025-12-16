@@ -220,7 +220,7 @@ export default function Preloader() {
                                 data-preloader-video
                             >
                                 <source
-                                    src='/videos/intro.mp4'
+                                    src='/videos/intro-03.mp4'
                                     type='video/mp4'
                                 />
                             </video>
