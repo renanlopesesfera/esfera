@@ -200,7 +200,7 @@ export default function Footer() {
 								rel='noopener noreferrer'
 								className='text-18 transition-opacity duration-200 hover:opacity-70'
 							>
-								<b className='font-semibold'>Av. Rep. Argentina, 1228</b> <br />
+								<b className='font-semibold'>Av. Rep. Argentina, 1228 - Sala 2210</b> <br />
 								Vila Izabel, Curitiba - PR, 80610-260
 							</Link>
 						</MagneticButton>

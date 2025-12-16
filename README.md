@@ -139,6 +139,6 @@ Este projeto é privado e proprietário da Agência Esfera.
 ## 📧 Contato
 
 **Agência Esfera**
-- Email: agenciaesfera@agenciaesfera.com.br
+- Email: administrativo@agenciaesfera.com.br
 - Endereço: Av. Rep. Argentina, 1228 - Vila Izabel, Curitiba - PR, 80610-260
 - Website: https://agenciaesfera.com.br

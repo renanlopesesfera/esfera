@@ -106,11 +106,11 @@ export default function RootLayout({
 		"contactPoint": [
 			{
 				"@type": "ContactPoint",
-				"email": "agenciaesfera@agenciaesfera.com.br",
+				"email": "administrativo@agenciaesfera.com.br",
 				"contactType": "customer support"
 			}
 		],
-		"email": "agenciaesfera@agenciaesfera.com.br",
+		"email": "administrativo@agenciaesfera.com.br",
 		"sameAs": [
 			"https://facebook.com/AgenciaEsfera/",
 			"https://instagram.com/agencia_esfera/",

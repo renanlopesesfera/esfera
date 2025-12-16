@@ -37,7 +37,7 @@ export default function About() {
             </BannerInternal>
 
             <MultiText
-                title='Nossos eventos conectam pessoas, idéias e marcas'
+                title='Nossos eventos conectam pessoas, ideias e marcas'
                 subTitle='Quem somos'
                 className='pt-16 sm:pt-28 lg:pt-32'
             >
