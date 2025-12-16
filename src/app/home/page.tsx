@@ -5,6 +5,9 @@ import BigNumbers from '@/components/BigNumbers'
 import ClientsSlider from '@/components/ClientsSlider'
 import Portfolio from '@/components/Portfolio'
 
+// ISR
+export const revalidate = 3600
+
 export default function Home() {
 	return (
 		<main>

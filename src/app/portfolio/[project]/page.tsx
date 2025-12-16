@@ -17,6 +17,18 @@ import NextProject from '@/components/PortfolioBlocks/NextProject'
 import { getPortfolioBySlug } from '@/lib/wordpress/getPortfolioBySlug'
 import { getPortfolioList } from '@/lib/wordpress/getPortfolio'
 
+// ISR
+export const revalidate = 3600
+
+// Generate static params for all portfolio projects at build time
+export async function generateStaticParams() {
+	const projects = await getPortfolioList()
+	
+	return projects.map((project) => ({
+		project: project.slug,
+	}))
+}
+
 export default async function Project({
     params
 }: {

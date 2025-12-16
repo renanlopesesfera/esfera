@@ -4,6 +4,9 @@ import Section from './Section'
 // libs
 import { getPortfolioList } from '@/lib/wordpress/getPortfolio'
 
+// ISR
+export const revalidate = 3600
+
 export const metadata = {
 	title: 'Portfólio Agência Esfera',
 	description: 'Confira o nosso portfólio de projetos.',
