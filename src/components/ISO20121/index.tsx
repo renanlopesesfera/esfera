@@ -43,16 +43,9 @@ export default function ISO20121() {
                             </h2>
 
                             <p className='text-18'>
-                                <b>CERTIFICAÇÃO ISO 20121 - Sistemas de Gestão para a Sustentabilidade de Eventos</b><br /><br />
-
-                                Temos orgulho em ser uma empresa certificada na ISO 20121, a principal norma internacional voltada à gestão sustentável de eventos. Ela estabelece diretrizes para que todas as etapas do projeto, do planejamento à execução, sejam conduzidas com responsabilidade ambiental, social e econômica.<br /><br />
-
-                                Ser uma empresa certificada ISO 20121 significa que adotamos processos que reduzem impactos ambientais, promovem relações éticas com fornecedores, valorizam as pessoas envolvidas e garantem a melhoria contínua de nossas entregas.<br /><br />
-
-                                Na prática, isso se traduz em eventos mais conscientes, eficientes e alinhados às exigências de um mercado que valoriza transparência, governança e legado.
+                                A atuação da Agência Esfera é orientada por práticas de governança, sustentabilidade e conformidade, integrando políticas institucionais e certificações que norteiam nossa operação.
                             </p>
 
-                            {/*
                             <MagneticButton>
                                 <a
                                     href='#'
@@ -63,7 +56,6 @@ export default function ISO20121() {
                                    Saiba mais 
                                 </a>
                             </MagneticButton>
-                            */}
 
                         </div>
 
