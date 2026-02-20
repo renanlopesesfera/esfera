@@ -1,11 +1,13 @@
 // libraries
 import Image from 'next/image'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 // components
 import MagneticButton from '@/components/Utils/Animations/MagneticButton'
 import AnimatedText from '@/components/Utils/Animations/AnimatedText'
 import Accordion from '@/components/Accordion'
+import TextReveal from '@/components/Utils/Animations/TextReveal'
 
 // svg
 import UxPdf from '@/assets/svg/ux/pdf.svg'
@@ -14,46 +16,26 @@ export default function ISO20121() {
     return (
         <section className='bg-black pb-15 sm:pb-20 md:pb-25 xl:pb-30'>
             <div className='base-container'>
-                <div className='bg-yellow pb-8 pt-5 lg:py-15 px-8 lg:px-10 rounded-xl'>
+                <div className='bg-yellow py-8 lg:py-15 px-8 lg:px-10 rounded-xl'>
                     <div className='row'>
 
-                        <div className='col-lg-4 flex justify-end lg:justify-center mb-15 lg:mb-0'>
-                            <div className='sticky top-10 flex items-center justify-center w-30 sm:w-40 lg:w-60 min-w-30 sm:min-w-40 lg:min-w-60 h-30 sm:h-40 lg:h-60 -mr-4 lg:mr-0'>
+                        <div className='col-lg-4 mb-10 lg:mb-0'>
 
-                                <Image
-                                    src='/img/svg/circle-text.svg'
-                                    alt='Responsabilidade Corporativa'
-                                    width={170}
-                                    height={170}
-                                    className='w-full h-full animate-spin'
-                                    style={{ animationDuration: '20s' }}
-                                />
+                            <h2 className='font-heading uppercase text-60 font-semibold tracking-tighter mb-6'>
+                                Responsabilidade Corporativa
+                            </h2>
 
-                                <Image
-                                    src='/img/svg/logo/icon-black.svg'
-                                    alt='Esfera'
-                                    width={65}
-                                    height={65}
-                                    className='absolute w-1/3 h-1/3 object-contain -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 -mt-0.5'
-                                />
-
-                            </div>
+                            <p className='text-18 lg:pr-4'>
+                                A atuação da Agência Esfera é orientada por práticas de governança, sustentabilidade e conformidade, integrando políticas institucionais e certificações que norteiam nossa operação.
+                            </p>
+                            
                         </div>
 
                         <div className='col-lg-8'>
 
                             <Accordion
                                 isBlack
-                                question='Responsabilidade Corporativa'
-                                answer={`
-                                    <p>
-                                        A atuação da Agência Esfera é orientada por práticas de governança, sustentabilidade e conformidade, integrando políticas institucionais e certificações que norteiam nossa operação.
-                                    </p>
-                                `}
-                            />
-
-                            <Accordion
-                                isBlack
+                                noPaddingLeft
                                 question='ISO 20121 - Sistema de Gestão para Eventos Sustentáveis'
                             >
 
@@ -68,9 +50,9 @@ export default function ISO20121() {
                                         href='/pdf/politica-de-sustentabilidade.pdf'
                                         target='_blank'
                                         rel='noopener noreferrer'
-                                        className='button button--white lowercase before:content-none! after:content-none!'
+                                        className='button button--white max-sm:px-6! leading-normal!'
                                     >
-                                        Política de Sustentabilidade <UxPdf className='w-4 h-4 ml-2 [&>path]:fill-current' />
+                                        Política de Sustentabilidade <UxPdf className='w-4 h-4 ml-2 [&>path]:fill-current max-sm:hidden' />
                                     </a>
                                 </MagneticButton>
 
@@ -78,6 +60,7 @@ export default function ISO20121() {
 
                             <Accordion
                                 isBlack
+                                noPaddingLeft
                                 question='Código de Conduta de Fornecedores'
                             >
 
@@ -88,20 +71,21 @@ export default function ISO20121() {
                                 </p>
 
                                 <MagneticButton className='mb-4'>
-                                    <a
+                                    <Link
                                         href='/pdf/codigo-de-conduta-fornecedores.pdf'
                                         target='_blank'
                                         rel='noopener noreferrer'
-                                        className='button button--white lowercase before:content-none! after:content-none!'
+                                        className='button button--white max-sm:px-6! leading-normal!'
                                     >
-                                        Código de Conduta de Fornecedores <UxPdf className='w-4 h-4 ml-2 [&>path]:fill-current' />
-                                    </a>
+                                        Código de Conduta de Fornecedores <UxPdf className='w-4 h-4 ml-2 [&>path]:fill-current max-sm:hidden' />
+                                    </Link>
                                 </MagneticButton>
 
                             </Accordion>
 
                             <Accordion
                                 isBlack
+                                noPaddingLeft
                                 question='Política de Privacidade'
                             >
 
@@ -112,20 +96,21 @@ export default function ISO20121() {
                                 </p>
 
                                 <MagneticButton className='mb-4'>
-                                    <a
+                                    <Link
                                         href='/pdf/politica-de-seguranca-da-informacao-e-protecao-de-privacidade.pdf'
                                         target='_blank'
                                         rel='noopener noreferrer'
-                                        className='button button--white lowercase before:content-none! after:content-none!'
+                                        className='button button--white max-sm:px-6! leading-normal!'
                                     >
-                                        Política de Privacidade <UxPdf className='w-4 h-4 ml-2 [&>path]:fill-current' />
-                                    </a>
+                                        Política de Privacidade <UxPdf className='w-4 h-4 ml-2 [&>path]:fill-current max-sm:hidden' />
+                                    </Link>
                                 </MagneticButton>
 
                             </Accordion>
 
                             <Accordion
                                 isBlack
+                                noPaddingLeft
                                 question='Apoios Institucionais'
                             >
 
@@ -133,21 +118,23 @@ export default function ISO20121() {
                                     Apoiamos iniciativas que geram impacto positivo em comunidades locais e internacionais.
                                 </p>
 
-                                <div className='grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4'>
+                                <div className='grid sm:flex sm:flex-wrap gap-2 md:gap-4'>
                                     {[
                                         {
                                             src: '/img/badges/pequeno-principe.png',
                                             url: 'https://pequenoprincipe.org.br/',
                                             alt: 'Pequeno Príncipe',
                                             width: 840,
-                                            height: 840
+                                            height: 840,
+                                            aspect: 'square'
                                         },
                                         {
                                             src: '/img/badges/fadc.png',
                                             url: 'https://www.fadc.org.br/',
                                             alt: 'FADC',
-                                            width: 246,
-                                            height: 183
+                                            width: 596,
+                                            height: 183,
+                                            aspect: 'video'
                                         }
                                     ].map((item, i) => (
                                         <Link
@@ -155,14 +142,18 @@ export default function ISO20121() {
                                             href={item.url}
                                             target='_blank'
                                             rel='noopener noreferrer'
-                                            className='flex items-center justify-center bg-white rounded-md md:rounded-lg p-8 w-full aspect-square before:content-none! after:content-none! hover:scale-95 transition-all duration-200'
+                                            className={clsx(
+                                                'flex items-center justify-center bg-white rounded-md p-5 h-30! md:h-40! before:content-none! after:content-none! hover:scale-95 transition-all duration-200',
+                                                item.aspect === 'square' && 'sm:aspect-square',
+                                                item.aspect === 'video' && 'sm:aspect-video'
+                                            )}
                                         >
                                             <Image
                                                 src={item.src}
                                                 alt={item.alt}
                                                 width={item.width}
                                                 height={item.height}
-                                                className='w-full h-auto object-contain'
+                                                className='w-full h-full object-contain'
                                                 loading='lazy'
                                             />
                                         </Link>

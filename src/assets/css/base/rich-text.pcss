@@ -1,13 +1,13 @@
 @layer utilities {
     .rich-text {
-        @apply flex flex-col gap-8 leading-loose;
+        @apply flex flex-col gap-6 md:gap-8 leading-loose;
 
         b,
         strong {
             @apply font-semibold;
         }
 
-        a {
+        a:not([class]) {
             @apply relative inline-flex overflow-hidden w-fit;
 
             &:before {
@@ -36,6 +36,10 @@
                     @apply content-[''] w-1 min-w-1 h-1 bg-current absolute left-0 top-3.5;
                 }
             }
+        }
+
+        p {
+            @apply leading-relaxed;
         }
     
         /*

@@ -10,13 +10,15 @@ export interface Props {
 	answer?: string
 	isBlack?: boolean
 	children?: React.ReactNode
+	noPaddingLeft?: boolean
 }
 
 export default function Accordion({
 	question,
 	answer,
 	isBlack = false,
-	children
+	children,
+	noPaddingLeft = false
 }: Props) {
 
 	const [isActive, setIsActive] = useState(false)
@@ -66,7 +68,8 @@ export default function Accordion({
 				)}>
 					<div className={clsx(
 						'rich-text flex flex-col gap-4 pt-4 px-4 [&_ul]:flex [&_ul]:flex-col [&_ul]:gap-2',
-						isBlack ? 'text-black' : 'text-white'
+						isBlack ? 'text-black' : 'text-white',
+						noPaddingLeft && 'px-0! md:px-1!'
 					)}>
 						{children ? children : (
 							<div dangerouslySetInnerHTML={{ __html: answer || '' }} />
