@@ -190,7 +190,7 @@ export default function RootLayout({
 
 				<div id='overlay' />
 
-				<Preloader />
+				{ process.env.NODE_ENV !== 'development' && <Preloader /> }
 
 				<PageTransition>
 					<SmoothScroller>

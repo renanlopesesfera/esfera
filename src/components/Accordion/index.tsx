@@ -7,12 +7,16 @@ import { useState } from 'react'
 // interface
 export interface Props {
 	question: string
-	answer: string
+	answer?: string
+	isBlack?: boolean
+	children?: React.ReactNode
 }
 
 export default function Accordion({
 	question,
-	answer
+	answer,
+	isBlack = false,
+	children
 }: Props) {
 
 	const [isActive, setIsActive] = useState(false)
@@ -26,8 +30,11 @@ export default function Accordion({
 
 			<button
 				className={clsx(
-					'flex justify-between gap-10 w-full text-white hover:border-t-white cursor-pointer border-t border-t-gray-dark pt-6 transition-colors duration-300 text-left',
-					isActive && 'border-t-white'
+					'flex justify-between gap-10 w-full cursor-pointer border-t pt-6 transition-colors duration-300 text-left',
+					isBlack
+						? 'text-black border-t-gray-dark hover:border-t-black'
+						: 'text-white border-t-gray-dark hover:border-t-white',
+					isActive && (isBlack ? 'border-t-black' : 'border-t-white')
 				)}
 				onClick={toggle}
 				type='button'
@@ -51,16 +58,20 @@ export default function Accordion({
 
 			<div className={clsx(
 				'relative overflow-hidden grid grid-rows-[0fr] transition-all duration-300',
-				isActive && 'grid-rows-[1fr]'
+				isActive && 'grid-rows-[1fr] overflow-visible'
 			)}>
 				<div className={clsx(
 					'min-h-0 transition-opacity duration-300 invisible opacity-0 overflow-hidden',
-					isActive && 'visible opacity-100'
+					isActive && 'visible opacity-100 overflow-visible'
 				)}>
-					<div
-						className='rich-text flex flex-col gap-4 text-white pt-4 px-4 [&_ul]:flex [&_ul]:flex-col [&_ul]:gap-2'
-						dangerouslySetInnerHTML={{ __html: answer }}
-					/>
+					<div className={clsx(
+						'rich-text flex flex-col gap-4 pt-4 px-4 [&_ul]:flex [&_ul]:flex-col [&_ul]:gap-2',
+						isBlack ? 'text-black' : 'text-white'
+					)}>
+						{children ? children : (
+							<div dangerouslySetInnerHTML={{ __html: answer || '' }} />
+						)}
+					</div>
 				</div>
 			</div>
 
