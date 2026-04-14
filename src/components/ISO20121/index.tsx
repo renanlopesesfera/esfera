@@ -135,6 +135,14 @@ export default function ISO20121() {
                                             width: 596,
                                             height: 183,
                                             aspect: 'video'
+                                        },
+                                        {
+                                            src: '/img/badges/msf.png',
+                                            url: 'https://www.msf.org.br/',
+                                            alt: 'Médicos sem Fronteiras',
+                                            width: 1200,
+                                            height: 161,
+                                            aspect: 'super-wide'
                                         }
                                     ].map((item, i) => (
                                         <Link
@@ -145,7 +153,8 @@ export default function ISO20121() {
                                             className={clsx(
                                                 'flex items-center justify-center bg-white rounded-md p-5 h-30! md:h-40! before:content-none! after:content-none! hover:scale-95 transition-all duration-200',
                                                 item.aspect === 'square' && 'sm:aspect-square',
-                                                item.aspect === 'video' && 'sm:aspect-video'
+                                                item.aspect === 'video' && 'sm:aspect-video',
+                                                item.aspect === 'super-wide' && 'sm:aspect-16/6'
                                             )}
                                         >
                                             <Image
