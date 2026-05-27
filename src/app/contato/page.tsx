@@ -82,7 +82,7 @@ export default function Contact() {
 												href='https://agenciaesfera.vagas.solides.com.br/'
 												target='_blank'
 												rel='noopener noreferrer'
-												className='font-semibold hover-underline'
+												className='font-semibold hover-underline-white after:bg-yellow!'
 											>
 												Cadastre-se no nosso banco de talentos!
 											</Link>
