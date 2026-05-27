@@ -55,7 +55,7 @@ export default function Contact() {
 									))}
 								</ul>
 
-								<div className='flex flex-col mt-20 lg:mt-6'>
+								<div className='flex flex-col mt-12 lg:mt-6'>
 									
 									<MagneticButton>
 										<Link
@@ -74,6 +74,20 @@ export default function Contact() {
 											{contact.email}
 										</Link>
 									</MagneticButton>
+
+									<div className='text-18 max-sm:text-base! mt-6'>
+										Quer fazer parte do time Esfera? <br />
+										<MagneticButton>
+											<Link
+												href='https://agenciaesfera.vagas.solides.com.br/'
+												target='_blank'
+												rel='noopener noreferrer'
+												className='font-semibold hover-underline'
+											>
+												Cadastre-se no nosso banco de talentos!
+											</Link>
+										</MagneticButton>
+									</div>
 
 								</div>
 
