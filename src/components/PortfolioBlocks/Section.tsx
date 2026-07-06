@@ -5,7 +5,7 @@ import clsx from 'clsx'
 interface Props {
     children: React.ReactNode
     className?: string
-    ref?: React.RefObject<HTMLDivElement>
+    ref?: React.RefObject<HTMLDivElement | null>
 }
 
 export default function Section({

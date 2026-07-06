@@ -1,7 +1,30 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-	turbopack: {},
+	turbopack: {
+		rules: {
+			'*.svg': {
+				loaders: [
+					{
+						loader: '@svgr/webpack',
+						options: {
+							svgoConfig: {
+								plugins: [{
+									name: 'preset-default',
+									params: {
+										overrides: {
+											removeViewBox: false
+										}
+									}
+								}]
+							}
+						}
+					}
+				],
+				as: '*.js'
+			}
+		}
+	},
 	reactStrictMode: false,
 	webpack(config) {
 		const fileLoaderRule = config.module.rules.find((rule) =>

@@ -26,6 +26,7 @@ export default function Menu() {
 	const menuAnimationRef = useRef<gsap.core.Timeline | null>(null)
 	const scrollStateRef = useRef({
 		lastScroll: 0,
+		upDistance: 0,
 		isScrollingUp: false,
 		isInteracting: false,
 		hideTimeout: null as NodeJS.Timeout | null
@@ -170,6 +171,7 @@ export default function Menu() {
 		
 		// reset scroll state
 		scrollStateRef.current.lastScroll = 0
+		scrollStateRef.current.upDistance = 0
 		scrollStateRef.current.isScrollingUp = false
 
 		if (scrollStateRef.current.hideTimeout) {
@@ -231,6 +233,7 @@ export default function Menu() {
 					const isSignificantScroll = Math.abs(scrollDiff) > 3
 
 					if (isAboveThreshold) {
+						state.upDistance = 0
 						hideMenu(menu, true)
 						state.lastScroll = scroll
 						ticking = false
@@ -240,10 +243,20 @@ export default function Menu() {
 					if (isSignificantScroll) {
 						const isScrollingUp = scrollDiff > 0
 
-						if (isScrollingUp && !state.isScrollingUp) {
-							showMenu(menu)
-						} else if (!isScrollingUp && state.isScrollingUp) {
-							hideMenu(menu)
+						if (isScrollingUp) {
+							// accumulate upward distance; only reveal after 100px up
+							state.upDistance += scrollDiff
+
+							if (state.upDistance >= 100 && !state.isScrollingUp) {
+								showMenu(menu)
+							}
+						} else {
+							// scrolling down: reset accumulator and hide
+							state.upDistance = 0
+
+							if (state.isScrollingUp) {
+								hideMenu(menu)
+							}
 						}
 
 						state.lastScroll = scroll

@@ -39,22 +39,40 @@ export default function ISO20121() {
                                 question='ISO 20121 - Sistema de Gestão para Eventos Sustentáveis'
                             >
 
-                                <p>
-                                    A ISO 20121 estabelece diretrizes para planejamento e execução de eventos com foco em sustentabilidade, gestão de impactos e melhoria contínua.<br /><br />
+                                <div className='md:flex md:justify-between md:gap-4 md:flex-row-reverse'>
 
-                                    Estamos entre as primeiras empresas brasileiras a adotar essa norma, reforçando nosso compromisso com práticas estruturadas de gestão em eventos.
-                                </p>
+                                    <div className='flex items-center justify-center bg-white rounded-md p-5 h-30 md:h-40 aspect-square max-md:mb-5'>
+                                        <Image
+                                            src='/img/badges/apcer.png'
+                                            alt='APCER'
+                                            width={351}
+                                            height={358}
+                                            className='w-full h-full object-contain'
+                                            loading='lazy'
+                                        />
+                                    </div>
 
-                                <MagneticButton className='mb-4'>
-                                    <a
-                                        href='/pdf/politica-de-sustentabilidade.pdf'
-                                        target='_blank'
-                                        rel='noopener noreferrer'
-                                        className='button button--white max-sm:px-6! leading-normal!'
-                                    >
-                                        Política de Sustentabilidade <UxPdf className='w-4 h-4 ml-2 [&>path]:fill-current max-sm:hidden' />
-                                    </a>
-                                </MagneticButton>
+                                    <div className='flex flex-col gap-4'>
+                                        <p>
+                                            A ISO 20121 estabelece diretrizes para planejamento e execução de eventos com foco em sustentabilidade, gestão de impactos e melhoria contínua.<br /><br />
+
+                                            Estamos entre as primeiras empresas brasileiras a adotar essa norma, reforçando nosso compromisso com práticas estruturadas de gestão em eventos.
+                                        </p>
+
+                                        <MagneticButton className='mb-4'>
+                                            <a
+                                                href='/pdf/politica-de-sustentabilidade.pdf'
+                                                target='_blank'
+                                                rel='noopener noreferrer'
+                                                className='button button--white max-sm:px-6! leading-normal!'
+                                            >
+                                                Política de Sustentabilidade <UxPdf className='w-4 h-4 ml-2 [&>path]:fill-current max-sm:hidden' />
+                                            </a>
+                                        </MagneticButton>
+
+                                    </div>
+
+                                </div>
 
                             </Accordion>
 
