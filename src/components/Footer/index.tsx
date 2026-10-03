@@ -162,14 +162,29 @@ export default function Footer() {
 
 						</div>
 
-						<MagneticButton>
-							<Link
-								href={pages.privacy}
-								className='hover-underline text-gray-light'
-							>
-								Política de Privacidade
-							</Link>
-						</MagneticButton>
+						{/* stacked on small screens and padded right so the Green Carbon badge never covers the links */}
+						<div className='flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-3 max-lg:pr-20'>
+
+							<MagneticButton>
+								<Link
+									href={pages.privacy}
+									className='hover-underline text-gray-light'
+								>
+									Política de Privacidade
+								</Link>
+							</MagneticButton>
+
+							{/* plain anchor on purpose: a full page load keeps analytics off the ethics channel */}
+							<MagneticButton>
+								<a
+									href={pages.ethics}
+									className='hover-underline text-gray-light'
+								>
+									Canal de Denúncias
+								</a>
+							</MagneticButton>
+
+						</div>
 
 					</div>
 

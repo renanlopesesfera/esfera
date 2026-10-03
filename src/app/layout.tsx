@@ -1,6 +1,5 @@
 // libraries
 import type { Metadata } from 'next'
-import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
 import clsx from 'clsx'
 import type { Viewport } from 'next'
@@ -13,6 +12,7 @@ import Footer from '@/components/Footer'
 import Preloader from '@/components/Preloader'
 import ViewportHeight from '@/components/Utils/ViewportHeight'
 import PageTransition from '@/components/Utils/PageTransition'
+import Analytics from '@/components/Utils/Analytics'
 
 // css
 import '@/assets/css/global.css'
@@ -178,7 +178,7 @@ export default function RootLayout({
 					dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
 				/>
 
-				<GoogleAnalytics gaId='G-TZ9LGN811S' />
+				<Analytics />
 
 			</head>
 

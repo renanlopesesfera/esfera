@@ -14,6 +14,7 @@ import UxCheck from '@/assets/svg/ux/check.svg'
 import UxEye from '@/assets/svg/ux/eye.svg'
 import UxEyeSlash from '@/assets/svg/ux/eye-slash.svg'
 import UxSpinner from '@/assets/svg/ux/spinner.svg'
+import UxChevronDown from '@/assets/svg/ux/chevron-down.svg'
 
 interface ModalProps {
 	id: string
@@ -320,6 +321,8 @@ interface InputProps {
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 	onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
 	match?: string
+	autoComplete?: string
+	inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode']
 }
 
 export const Input = ({
@@ -338,7 +341,9 @@ export const Input = ({
 	disabled,
 	onChange = () => {},
 	onKeyDown,
-	match
+	match,
+	autoComplete,
+	inputMode
 }: InputProps) => {
 	const {
 		register,
@@ -451,6 +456,8 @@ export const Input = ({
                         inputClassName
                     )}
 					disabled={disabled || false}
+					autoComplete={autoComplete}
+					inputMode={inputMode}
 					onKeyDown={handleKeyPress}
 					onFocus={() => setIsFocused(true)}
 					{...register(name, {
@@ -578,6 +585,7 @@ interface CheckboxProps {
 	required?: boolean
 	disabled?: boolean
 	checked?: boolean
+	value?: string
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 	children?: React.ReactNode
 }
@@ -591,6 +599,7 @@ export const Checkbox = ({
 	required,
 	disabled,
 	checked,
+	value,
 	onChange = () => {},
 	children
 }: CheckboxProps) => {
@@ -627,7 +636,7 @@ export const Checkbox = ({
 					className='absolute -z-1 opacity-0'
 					defaultChecked={checked}
 					disabled={disabled || false}
-					value={label}
+					value={value ?? label}
 					{...register(
                         name,
                         { ...validations }
@@ -637,7 +646,7 @@ export const Checkbox = ({
 				<span className='flex items-center gap-2 cursor-pointer'>
 
 					<span
-                        className='relative flex items-center justify-center w-7 min-w-7 h-7 p-1 border border-gray-lighter rounded-sm text-white'
+                        className='relative flex items-center justify-center w-7 min-w-7 h-7 p-1 border border-gray-lighter rounded-md text-white'
                         data-radio-box
                     >
 						<UxCheck />
@@ -669,6 +678,62 @@ export const Checkbox = ({
                     {String(errors[name].message)}
                 </p>
 			)}
+
+		</div>
+	)
+}
+
+interface SelectProps {
+	id: string
+	label?: string
+	name: string
+	options: string[]
+	placeholder: string
+	className?: string
+}
+
+export const Select = ({
+	id,
+	label,
+	name,
+	options,
+	placeholder,
+	className
+}: SelectProps) => {
+	const { register } = useFormContext()
+
+	return (
+		<div className={clsx(
+			'relative block w-full mb-2 sm:mb-4',
+			className
+		)}>
+
+			{label && (
+				<Label
+					id={id}
+					label={label}
+				/>
+			)}
+
+			<div className='relative'>
+
+				<select
+					id={id}
+					className='block w-full appearance-none border border-gray-lighter bg-transparent rounded-md text-black p-4 pr-12 cursor-pointer focus-visible:outline-1 focus-visible:outline-gray-light'
+					defaultValue=''
+					{...register(name)}
+				>
+					<option value=''>{placeholder}</option>
+					{options.map((option) => (
+						<option key={option} value={option}>
+							{option}
+						</option>
+					))}
+				</select>
+
+				<UxChevronDown className='absolute top-1/2 right-4 -translate-y-1/2 w-3 h-3 pointer-events-none [&>path]:fill-current' />
+
+			</div>
 
 		</div>
 	)

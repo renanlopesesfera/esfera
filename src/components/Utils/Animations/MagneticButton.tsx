@@ -26,9 +26,14 @@ export default function MagneticButton({
         const magnetButton = buttonRef.current
         if (!magnetButton) return
 
-        // Cache bounding rect and update only when needed
+        // Cache the resting rect (without the magnet offset). Layout can shift
+        // without a scroll or resize (accordions opening, content loading),
+        // so it is also re-measured every time the cursor enters the button.
         const updateBounding = () => {
-            boundingRef.current = magnetButton.getBoundingClientRect()
+            const rect = magnetButton.getBoundingClientRect()
+            const offsetX = Number(gsap.getProperty(magnetButton, 'x')) || 0
+            const offsetY = Number(gsap.getProperty(magnetButton, 'y')) || 0
+            boundingRef.current = new DOMRect(rect.left - offsetX, rect.top - offsetY, rect.width, rect.height)
         }
 
         // Throttled bounding rect update using RAF
@@ -60,6 +65,10 @@ export default function MagneticButton({
             })
         }
 
+        function handleMouseEnter() {
+            updateBounding()
+        }
+
         function handleMouseLeave(event: MouseEvent) {
             gsap.to(event.currentTarget, {
                 x: 0,
@@ -77,6 +86,7 @@ export default function MagneticButton({
         const viewport = document.getElementById('viewport')
 
         // Add event listeners
+        magnetButton.addEventListener('mouseenter', handleMouseEnter)
         magnetButton.addEventListener('mousemove', moveMagnet)
         magnetButton.addEventListener('mouseleave', handleMouseLeave)
         window.addEventListener('resize', handleResize, { passive: true })
@@ -89,6 +99,7 @@ export default function MagneticButton({
         // Cleanup
         return () => {
             if (magnetButton) {
+                magnetButton.removeEventListener('mouseenter', handleMouseEnter)
                 magnetButton.removeEventListener('mousemove', moveMagnet)
                 magnetButton.removeEventListener('mouseleave', handleMouseLeave)
             }

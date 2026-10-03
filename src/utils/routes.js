@@ -17,8 +17,16 @@ export const pages = {
 	// privacy
 	privacy: '/politica-de-privacidade',
 
+	// ethics (canal de denúncia)
+	ethics: '/etica',
+
 	// others
 	error: '/404'
+}
+
+// documents
+export const documents = {
+	ethicsCode: '/docs/codigo-de-etica-esfera.docx'
 }
 
 // social

@@ -14,13 +14,16 @@ interface Props {
     subTitle?: string
     children?: React.ReactNode
     className?: string
+    // widens the content columns below xl (col-lg-8 instead of col-lg-6)
+    wide?: boolean
 }
 
 export default function MultiText({
     title,
     subTitle,
     children,
-    className
+    className,
+    wide = false
 }: Props) {
     return (
         <Section className={className}>
@@ -28,7 +31,10 @@ export default function MultiText({
 
                 {title && (
                     <div className='row mb-8 lg:mb-20'>
-                        <div className='col-lg-6 offset-lg-4'>
+                        <div className={clsx(
+                            'offset-lg-4',
+                            wide ? 'col-lg-8 col-xl-6' : 'col-lg-6'
+                        )}>
                             <AnimatedTitle
                                 style='gray-black'
                                 className='text-60 font-semibold'
@@ -54,7 +60,7 @@ export default function MultiText({
 
                         {children && (
                             <div className={clsx(
-                                'col-lg-6',
+                                wide ? 'col-lg-8 col-xl-6' : 'col-lg-6',
                                 !subTitle && 'offset-lg-4'
                             )}>
                                 <div className='rich-text [&>div]:flex [&>div]:flex-col [&>div]:gap-6'>

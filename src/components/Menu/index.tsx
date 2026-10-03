@@ -32,6 +32,9 @@ export default function Menu() {
 		hideTimeout: null as NodeJS.Timeout | null
 	})
 	const pathname = usePathname()
+
+	// pages with a white background use the dark version of the menu
+	const isLightPage = pathname === pages.contact || pathname === pages.ethics
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	// helper function to check if a route is active (including nested routes)
@@ -345,7 +348,7 @@ export default function Menu() {
 											href={item.href}
 											className={clsx(
 												'hover-underline text-20 font-normal',
-												isActiveRoute(item.href) ? 'text-yellow' : pathname === pages.contact ? 'text-black' : 'text-white'
+												isActiveRoute(item.href) ? 'text-yellow' : isLightPage ? 'text-black' : 'text-white'
 											)}
 										>
 											{item.label}
@@ -373,7 +376,7 @@ export default function Menu() {
 										rel='noopener noreferrer'
 										className={clsx(
 											'flex items-center justify-center w-12 min-w-12 h-12 border border-current rounded-full transition-colors duration-200 hover:text-black hover:bg-yellow hover:border-yellow p-4',
-											pathname === pages.contact ? 'text-black' : 'text-white'
+											isLightPage ? 'text-black' : 'text-white'
 										)}
 										aria-label={item.name}
 									>
@@ -387,7 +390,7 @@ export default function Menu() {
 							<div
 								className={clsx(
 									'w-10 h-px block mx-2',
-									pathname === pages.contact ? 'bg-black' : 'bg-white'
+									isLightPage ? 'bg-black' : 'bg-white'
 								)}
 								data-top-menu-divider
 							/>
@@ -398,7 +401,7 @@ export default function Menu() {
 								<button
 									className={clsx(
 										'w-14 sm:w-12 min-w-14 sm:min-w-12 h-14 sm:h-12 rounded-full border border-current hover:border-yellow hover:bg-yellow hover:text-black flex flex-col items-center justify-center gap-1 relative transition-colors duration-200 cursor-pointer px-3 group',
-										pathname === pages.contact ? 'text-black' : 'text-white'
+										isLightPage ? 'text-black' : 'text-white'
 									)}
 									type='button'
 									onClick={toggleFsMenu}
@@ -447,7 +450,7 @@ export default function Menu() {
 				<div
 					className={clsx(
 						'bg-linear-180 to-transparent absolute inset-0 z-0',
-						pathname === pages.contact ? 'from-white/90' : 'from-black/90'
+						isLightPage ? 'from-white/90' : 'from-black/90'
 					)}
 					data-sticky-menu-bg
 				/>

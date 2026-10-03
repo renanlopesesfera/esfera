@@ -11,6 +11,11 @@ import TextReveal from '@/components/Utils/Animations/TextReveal'
 
 // svg
 import UxPdf from '@/assets/svg/ux/pdf.svg'
+import UxDownload from '@/assets/svg/ux/download.svg'
+import UxArrowRight from '@/assets/svg/ux/arrow-right.svg'
+
+// utils
+import { documents, pages } from '@/utils/routes'
 
 export default function ISO20121() {
     return (
@@ -79,24 +84,47 @@ export default function ISO20121() {
                             <Accordion
                                 isBlack
                                 noPaddingLeft
-                                question='Código de Conduta de Fornecedores'
+                                question='Código de Ética Esfera'
                             >
 
                                 <p>
-                                    Diretrizes que orientam relações transparentes, éticas e responsáveis fornecedores.<br /><br />
+                                    Diretrizes que estabelecem princípios e padrões de conduta aplicáveis a colaboradores: funcionários, fornecedores, parceiros e demais públicos da Esfera.<br /><br />
 
-                                    O alinhamento com nossos parceiros é parte essencial da consistência operacional e da integridade dos projetos.
+                                    Um referencial comum para orientar decisões e práticas alinhadas à ética, à transparência e à integridade.
                                 </p>
 
                                 <MagneticButton className='mb-4'>
-                                    <Link
-                                        href='/pdf/codigo-de-conduta-fornecedores.pdf'
-                                        target='_blank'
-                                        rel='noopener noreferrer'
+                                    <a
+                                        href={documents.ethicsCode}
+                                        download
                                         className='button button--white max-sm:px-6! leading-normal!'
                                     >
-                                        Código de Conduta de Fornecedores <UxPdf className='w-4 h-4 ml-2 [&>path]:fill-current max-sm:hidden' />
-                                    </Link>
+                                        Código de Ética Esfera <UxDownload className='w-4 h-4 ml-2 [&>path]:fill-current max-sm:hidden' />
+                                    </a>
+                                </MagneticButton>
+
+                            </Accordion>
+
+                            <Accordion
+                                isBlack
+                                noPaddingLeft
+                                question='Canal de Denúncia'
+                            >
+
+                                <p>
+                                    Espaço seguro e confidencial para comunicar, de forma anônima, situações que estejam em desacordo com o Código de Ética Esfera.<br /><br />
+
+                                    As informações são tratadas com responsabilidade, sigilo e respeito às pessoas envolvidas.
+                                </p>
+
+                                {/* plain anchor on purpose: a full page load keeps analytics off the ethics channel */}
+                                <MagneticButton className='mb-4'>
+                                    <a
+                                        href={pages.ethics}
+                                        className='button button--white max-sm:px-6! leading-normal!'
+                                    >
+                                        Acessar formulário <UxArrowRight className='w-4 h-4 ml-2 [&>path]:fill-current max-sm:hidden' />
+                                    </a>
                                 </MagneticButton>
 
                             </Accordion>
