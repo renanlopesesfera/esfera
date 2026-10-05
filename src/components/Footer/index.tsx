@@ -162,7 +162,6 @@ export default function Footer() {
 
 						</div>
 
-						{/* stacked on small screens and padded right so the Green Carbon badge never covers the links */}
 						<div className='flex flex-col sm:flex-row sm:flex-wrap gap-x-6 gap-y-3 max-lg:pr-20'>
 
 							<MagneticButton>
@@ -174,7 +173,7 @@ export default function Footer() {
 								</Link>
 							</MagneticButton>
 
-							{/* plain anchor on purpose: a full page load keeps analytics off the ethics channel */}
+							{/* plain <a>: full page load keeps analytics off /etica */}
 							<MagneticButton>
 								<a
 									href={pages.ethics}

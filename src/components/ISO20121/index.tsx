@@ -117,7 +117,7 @@ export default function ISO20121() {
                                     As informações são tratadas com responsabilidade, sigilo e respeito às pessoas envolvidas.
                                 </p>
 
-                                {/* plain anchor on purpose: a full page load keeps analytics off the ethics channel */}
+                                {/* plain <a>: full page load keeps analytics off /etica */}
                                 <MagneticButton className='mb-4'>
                                     <a
                                         href={pages.ethics}

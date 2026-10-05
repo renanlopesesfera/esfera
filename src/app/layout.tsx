@@ -127,7 +127,7 @@ export default function RootLayout({
 	}
 
 	return (
-		<html lang='pt-BR' className={clsx(poppins.className, antonio.className)}>
+		<html lang='pt-BR' data-scroll-behavior='smooth' className={clsx(poppins.className, antonio.className)}>
 
 			<head>
 

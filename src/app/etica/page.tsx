@@ -9,8 +9,6 @@ import UxDownload from '@/assets/svg/ux/download.svg'
 // utils
 import { documents } from '@/utils/routes'
 
-// This page promises anonymity: no analytics (see components/Utils/Analytics),
-// no maps, embeds or third-party scripts, and no referrer sent to other sites.
 export const metadata = {
 	title: 'Ética e Conduta Agência Esfera: Código de Ética | Canal de Denúncia',
 	description: 'Código de Ética Esfera e canal seguro e confidencial para relatar, de forma anônima, condutas em desacordo com o Código.',

@@ -3,21 +3,11 @@ import { randomInt } from 'node:crypto'
 // utils
 import { MAX_ATTACHMENT_MB, RELACOES, RETORNOS, TEMAS, type Retorno } from '@/utils/ethics'
 
-// Canal de Denúncia
-// Receives a report from /etica and forwards it, server to server, to the endpoint
-// that stores it for the Comitê de Ética (ETICA_ENDPOINT). Forwarding from here means
-// the reporter's browser never talks to the storage provider, so their IP stays out of it.
-//
-// Anonymity rules for this route (see the spec in the original etica-e-conduta.html):
-// - never log the request body, headers or IP
-// - only the whitelisted fields below are forwarded; anything else is dropped
-// - name and contact are dropped unless the chosen "retorno" needs them
-
 const ENDPOINT = process.env.ETICA_ENDPOINT
 
 const MAX_ATTACHMENT_BYTES = MAX_ATTACHMENT_MB * 1024 * 1024
 
-// extension -> mime type and the magic bytes the decoded file must start with
+// allowed attachments: mime type and the file's first bytes
 const ATTACHMENT_TYPES: Record<string, { mime: string, magic: number[] }> = {
 	pdf: { mime: 'application/pdf', magic: [0x25, 0x50, 0x44, 0x46] },
 	jpg: { mime: 'image/jpeg', magic: [0xff, 0xd8, 0xff] },
@@ -44,7 +34,7 @@ const oneOf = (value: unknown, list: string[]): string => {
 	return typeof value === 'string' && list.includes(value) ? value : ''
 }
 
-// tracking code, unrelated to whoever sent the report (no I, O, 0 or 1 to avoid confusion)
+// no I, O, 0 or 1 to avoid confusion
 const generateCode = (): string => {
 	const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
 	let suffix = ''
@@ -52,8 +42,7 @@ const generateCode = (): string => {
 	return `ESF-${new Date().getFullYear()}-${suffix}`
 }
 
-// drops EXIF/XMP (APP1), IPTC (APP13) and comment segments, where cameras and phones
-// store GPS position, device serial numbers and author names
+// removes EXIF (GPS, device, author) from jpegs
 const stripJpegMetadata = (input: Buffer): Buffer => {
 	const parts: Buffer[] = [input.subarray(0, 2)]
 	let offset = 2
@@ -63,7 +52,6 @@ const stripJpegMetadata = (input: Buffer): Buffer => {
 
 		const marker = input[offset + 1]
 
-		// start of scan: the image data follows, copy everything from here
 		if (marker === 0xda) {
 			parts.push(input.subarray(offset))
 			return Buffer.concat(parts)
@@ -83,7 +71,7 @@ const stripJpegMetadata = (input: Buffer): Buffer => {
 	return input
 }
 
-// drops text, EXIF and timestamp chunks from a PNG
+// removes text and EXIF chunks from pngs
 const stripPngMetadata = (input: Buffer): Buffer => {
 	const dropped = ['tEXt', 'iTXt', 'zTXt', 'eXIf', 'tIME']
 	const parts: Buffer[] = [input.subarray(0, 8)]
@@ -124,7 +112,6 @@ const parseAttachment = (value: unknown): Attachment | null | 'invalid' => {
 	if (type.mime === 'image/jpeg') file = stripJpegMetadata(file)
 	if (type.mime === 'image/png') file = stripPngMetadata(file)
 
-	// the original file name can identify the sender, so it is replaced
 	return {
 		nome: `evidencia.${extension === 'jpeg' ? 'jpg' : extension}`,
 		tipo: type.mime,
@@ -146,7 +133,7 @@ export async function POST(req: Request) {
 		return json({ ok: false, erro: 'invalido' }, 400)
 	}
 
-	// honeypot: real people never see or fill this field
+	// honeypot
 	if (text(body.website)) {
 		return json({ ok: true, codigo: generateCode() })
 	}
@@ -188,7 +175,7 @@ export async function POST(req: Request) {
 	}
 
 	try {
-		// text/plain because the Apps Script endpoint does not answer CORS preflights
+		// text/plain: Apps Script doesn't answer CORS preflights
 		const response = await fetch(ENDPOINT, {
 			method: 'POST',
 			headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -203,7 +190,6 @@ export async function POST(req: Request) {
 
 		return json({ ok: true, codigo })
 	} catch (error) {
-		// log only the failure reason, never the report
 		console.error('[etica] forwarding failed:', error instanceof Error ? error.message : 'unknown')
 		return json({ ok: false, erro: 'envio' }, 502)
 	}

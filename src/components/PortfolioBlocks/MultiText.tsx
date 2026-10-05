@@ -14,7 +14,6 @@ interface Props {
     subTitle?: string
     children?: React.ReactNode
     className?: string
-    // widens the content columns below xl (col-lg-8 instead of col-lg-6)
     wide?: boolean
 }
 

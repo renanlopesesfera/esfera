@@ -1,4 +1,4 @@
-// shared between the /etica form and the /api/etica route, so both accept the same values
+// shared by the /etica form and /api/etica
 
 export const ETHICS_EMAIL = 'etica@agenciaesfera.com.br'
 

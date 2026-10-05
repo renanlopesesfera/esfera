@@ -45,7 +45,6 @@ const RETORNO_OPTIONS: { value: Retorno, label: string }[] = [
 
 const getExtension = (fileName: string) => fileName.split('.').pop()?.toLowerCase() ?? ''
 
-// reads the attachment as base64 so it travels in the same request as the report
 const readAttachment = (file?: File): Promise<{ nome: string, dados: string } | null> => {
 	if (!file) return Promise.resolve(null)
 
@@ -66,7 +65,6 @@ const Help = ({ children }: { children: React.ReactNode }) => (
 	</p>
 )
 
-// same rhythm as MultiText: yellow subtitle on the left, content on the right
 const Step = ({ title, children }: { title?: string, children: React.ReactNode }) => (
 	<div className='mb-6 lg:mb-8 last:mb-0 first:border-t first:border-gray-lighter/60 first:pt-10 lg:first:pt-14'>
 		<div className='row'>
@@ -96,8 +94,7 @@ export default function EthicsForm() {
 	const [error, setError] = useState('')
 	const [sent, setSent] = useState<Sent | null>(null)
 
-	// shouldUnregister drops the fields of the return options that were not chosen,
-	// so a name or e-mail typed and then hidden is never sent
+	// shouldUnregister: hidden fields are never sent
 	const methods = useForm<FormValues>({
 		mode: 'onTouched',
 		shouldUnregister: true,
@@ -315,7 +312,7 @@ export default function EthicsForm() {
 
 					</Step>
 
-					{/* honeypot against spam bots, hidden from people and assistive tech */}
+					{/* honeypot */}
 					<div className='absolute -left-[9999px] w-px h-px overflow-hidden' aria-hidden='true'>
 						<label htmlFor='website'>Não preencha este campo</label>
 						<input

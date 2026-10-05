@@ -149,8 +149,8 @@ export default function About() {
                                 <Image
                                     src={item.src}
                                     alt={item.alt}
-                                    width={100}
-                                    height={100}
+                                    width={item.width}
+                                    height={item.height}
                                     className='block w-full max-h-[75%] h-auto object-contain brightness-0 opacity-75 group-hover:opacity-100 transition-opacity duration-200'
                                 />
                             </div>

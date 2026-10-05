@@ -14,6 +14,8 @@ import { horizontalLoop } from '@/utils/horizontalLoop'
 interface Props {
     logos: {
         src: string
+        width: number
+        height: number
         alt: string
     }[]
     className?: string
@@ -50,8 +52,8 @@ export default function Marquee({
                     <Image
                         src={item.src}
                         alt={item.alt}
-                        width={100}
-                        height={100}
+                        width={item.width}
+                        height={item.height}
                         className='block w-[35vw] md:w-[20vw] xl:w-[12vw] max-h-[20vw] md:max-h-[10vw] xl:max-h-[6vw] h-auto object-contain brightness-0 aspect-video'
                     />
                 </div>
