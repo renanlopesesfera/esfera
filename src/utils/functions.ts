@@ -93,3 +93,14 @@ export const getFocusableElementsOutside = (container: HTMLElement) => {
 export function firstChar(str: string) {
     return str.charAt(0) || ''
 }
+// years since Esfera was founded (April 8, 1999), turning over every April 8 in São Paulo time
+export function yearsOfExperience() {
+	const [year, month, day] = new Date()
+		.toLocaleDateString('en-CA', { timeZone: 'America/Sao_Paulo' })
+		.split('-')
+		.map(Number)
+
+	const hadAnniversary = month > 4 || (month === 4 && day >= 8)
+
+	return year - 1999 - (hadAnniversary ? 0 : 1)
+}

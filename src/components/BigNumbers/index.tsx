@@ -6,6 +6,9 @@ import TextReveal from '@/components/Utils/Animations/TextReveal'
 import Counter from '@/components/Utils/Animations/Counter'
 import AnimatedText from '@/components/Utils/Animations/AnimatedText'
 
+// utils
+import { yearsOfExperience } from '@/utils/functions'
+
 // interface
 interface Props {
     title: string
@@ -34,7 +37,7 @@ export default function BigNumbers({
                     {[
                         {
                             hasPlus: false,
-                            number: 26,
+                            number: yearsOfExperience(),
                             text: 'Anos de <br />experiência'
                         },
                         {

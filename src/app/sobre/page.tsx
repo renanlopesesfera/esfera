@@ -16,6 +16,8 @@ import ISO20121 from '@/components/ISO20121'
 // utils
 import { logos } from '@/utils/logos'
 
+export const revalidate = 3600
+
 export const metadata = {
 	title: 'Sobre a Esfera',
 	description: 'Conheça a Agência Esfera, uma agência de marketing digital que transforma ideias em resultados.',

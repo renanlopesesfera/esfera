@@ -12,6 +12,8 @@ import StaggerScale from '@/components/Utils/Animations/StaggerScale'
 // utils
 import { logos } from '@/utils/logos'
 
+export const revalidate = 3600
+
 export const metadata = {
 	title: 'Política de Privacidade',
 	description: 'Política de Privacidade da Agência Esfera',

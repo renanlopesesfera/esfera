@@ -4,6 +4,9 @@ import TextReveal from '@/components/Utils/Animations/TextReveal'
 import Accordion from '@/components/Accordion'
 import StaggerUp from '@/components/Utils/Animations/StaggerUp'
 
+// utils
+import { yearsOfExperience } from '@/utils/functions'
+
 export default function Awards() {
     return (
         <section className='bg-black py-15 sm:py-20 md:py-25 xl:py-30'>
@@ -19,7 +22,7 @@ export default function Awards() {
 
                         <TextReveal>
                             <p className='text-18 text-white'>
-                                Grandes conquistas rendem uma coleção de memórias únicas - são mais de 30 prêmios em 26 anos de Esfera.
+                                Grandes conquistas rendem uma coleção de memórias únicas - são mais de 30 prêmios em {yearsOfExperience()} anos de Esfera.
                             </p>
                         </TextReveal>
 
