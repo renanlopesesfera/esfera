@@ -26,7 +26,7 @@ export const pages = {
 
 // documents
 export const documents = {
-	ethicsCode: '/docs/codigo-de-etica-esfera.docx'
+	ethicsCode: '/pdf/codigo-de-etica-esfera.pdf'
 }
 
 // social

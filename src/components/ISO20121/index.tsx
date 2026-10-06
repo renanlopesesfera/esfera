@@ -11,7 +11,6 @@ import TextReveal from '@/components/Utils/Animations/TextReveal'
 
 // svg
 import UxPdf from '@/assets/svg/ux/pdf.svg'
-import UxDownload from '@/assets/svg/ux/download.svg'
 import UxArrowRight from '@/assets/svg/ux/arrow-right.svg'
 
 // utils
@@ -96,10 +95,11 @@ export default function ISO20121() {
                                 <MagneticButton className='mb-4'>
                                     <a
                                         href={documents.ethicsCode}
-                                        download
+                                        target='_blank'
+                                        rel='noopener noreferrer'
                                         className='button button--white max-sm:px-6! leading-normal!'
                                     >
-                                        Código de Ética Esfera <UxDownload className='w-4 h-4 ml-2 [&>path]:fill-current max-sm:hidden' />
+                                        Código de Ética Esfera <UxPdf className='w-4 h-4 ml-2 [&>path]:fill-current max-sm:hidden' />
                                     </a>
                                 </MagneticButton>
 
