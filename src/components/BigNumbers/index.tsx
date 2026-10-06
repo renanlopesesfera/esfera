@@ -42,17 +42,17 @@ export default function BigNumbers({
                         },
                         {
                             hasPlus: true,
-                            number: 6500,
+                            number: 8000,
                             text: 'Projetos <br/>executados'
                         },
                         {
                             hasPlus: true,
-                            number: 350,
+                            number: 450,
                             text: 'Clientes <br />satisfeitos'
                         },
                         {
                             hasPlus: false,
-                            number: 25,
+                            number: 35,
                             text: 'Prêmios <br />no setor'
                         }
                     ].map((item, i) => (
